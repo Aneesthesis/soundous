@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from './UI/Button';
+import { Rating } from './Rating';
 
 export default function Product({ products }) {
   return (
@@ -18,6 +19,7 @@ export default function Product({ products }) {
             <Link to={`/products/${prod.slug}`}>
               <p>{prod.name}</p>
             </Link>
+            <Rating rating={prod.rating} numReviews={prod.numReviews}/>
             <p>
               <strong>{prod.price}</strong>
             </p>
