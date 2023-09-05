@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import { ProductDetails } from '../components/ProductDetail';
+import { Helmet } from 'react-helmet-async';
+import { getError } from '../utils/getError';
 
 
 const reducer = (state, action) => {
@@ -35,7 +37,7 @@ export default function ProductPage() {
         const response = await axios.get(`/api/products/${slug}`);
         dispatch({ type: 'FETCH_SUCCESS', payload: response.data });
       } catch (error) {
-        dispatch({ type: 'FETCH_FAIL', payload: error.message });
+        dispatch({ type: 'FETCH_FAIL', payload: getError(error)});
       }
     };
     fetchData();
@@ -43,7 +45,10 @@ export default function ProductPage() {
 
 
   return (
-    loading? <div>Loading...</div>: error? <div>{error}</div>:
-    <ProductDetails product={product}/>
+    <div>
+    <Helmet><title>Amazona</title></Helmet>
+   {loading? <div>Loading...</div>: error? <div>{error}</div>:
+    <ProductDetails product={product}/>}
+    </div>
   );
 }

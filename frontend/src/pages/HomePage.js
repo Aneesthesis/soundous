@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { fetchProducts } from '../helper/fetchProducts';
 import logger from 'use-reducer-logger';
 import Product from '../components/Product';
+import { Helmet } from 'react-helmet-async';
+import { LoadingBox } from '../components/UI/LoadingBox';
+import { MessageBox } from '../components/UI/MessageBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -40,11 +43,12 @@ export default function HomePage() {
 
   return (
     <div>
+      <Helmet><title>Amazona</title></Helmet>
       <h1 className="font-bold text-3xl p-5">Featured Fashion</h1>
       {loading ? (
-        <div>loading...</div>
+        <LoadingBox/>
       ) : error ? (
-        <div>{error}</div>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <Product products={products} />
       )}

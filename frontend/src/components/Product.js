@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Button from './UI/Button';
 import { Rating } from './Rating';
 
 export default function Product({ products }) {
+
   return (
     <div className="flex flex-wrap md:flex-nowrap gap-2 content-center justify-center text-center p-4">
       {products.map((prod) => (
