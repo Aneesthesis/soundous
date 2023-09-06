@@ -4,6 +4,7 @@ import ProductPage from "./pages/ProductPage";
 import { Cart } from "./components/UI/Cart";
 import { useContext } from "react";
 import { Store } from "./Store";
+import { CartPage } from "./pages/CartPage";
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
 
@@ -33,7 +34,7 @@ function App() {
           <div className="flex">
             <Link to="/cart">
               <span className="bg-red-600 text-white font-semibold rounded-[50px] w-4 h-4 text-center">
-                {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                {cart.cartItems.reduce((acc, curr) => acc + curr.quantity, 0)}
               </span>
               <Cart />
             </Link>
@@ -45,6 +46,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/products/:slug" element={<ProductPage />}></Route>
+              <Route path="/cart" element={<CartPage />}></Route>
             </Routes>
           </section>
         </main>

@@ -22,8 +22,8 @@ export const ProductDetails = ({ product }) => {
     });
   };
   return (
-    <div className="product-detail my-5 mx-10 flex gap-x-10">
-      <div className="image w-[35%]">
+    <div className="product-detail my-5 mx-10 flex md:flex-row sm:flex-col gap-x-10">
+      <div className="image sm:[60%] lg:w-[30%]">
         <img src={product.image} alt={product.name} />
       </div>
       <div className="product-info flex flex-col gap-y-1 w-fit">

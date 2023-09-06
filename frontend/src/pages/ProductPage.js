@@ -1,25 +1,22 @@
-import axios from 'axios';
-import React, { useEffect, useReducer } from 'react';
-import { useParams } from 'react-router-dom';
-import { ProductDetails } from '../components/ProductDetail';
-import { Helmet } from 'react-helmet-async';
-import { getError } from '../utils/getError';
-
+import axios from "axios";
+import React, { useEffect, useReducer } from "react";
+import { useParams } from "react-router-dom";
+import { ProductDetails } from "../components/ProductDetail";
+import { Helmet } from "react-helmet-async";
+import { getError } from "../utils/getError";
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_REQUEST':
+    case "FETCH_REQUEST":
       return { ...state, loading: true };
-    case 'FETCH_SUCCESS':
+    case "FETCH_SUCCESS":
       return { ...state, loading: false, product: action.payload };
-    case 'FETCH_FAIL':
+    case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
 };
-
-
 
 export default function ProductPage() {
   const params = useParams();
@@ -27,28 +24,34 @@ export default function ProductPage() {
   const [{ loading, product, error }, dispatch] = useReducer(reducer, {
     loading: true,
     product: [],
-    error: '',
+    error: "",
   });
   //const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: 'FETCH_REQUEST' });
+      dispatch({ type: "FETCH_REQUEST" });
       try {
         const response = await axios.get(`/api/products/${slug}`);
-        dispatch({ type: 'FETCH_SUCCESS', payload: response.data });
+        dispatch({ type: "FETCH_SUCCESS", payload: response.data });
       } catch (error) {
-        dispatch({ type: 'FETCH_FAIL', payload: getError(error)});
+        dispatch({ type: "FETCH_FAIL", payload: getError(error) });
       }
     };
     fetchData();
   }, [slug]);
 
-
   return (
     <div>
-    <Helmet><title>Amazona</title></Helmet>
-   {loading? <div>Loading...</div>: error? <div>{error}</div>:
-    <ProductDetails product={product}/>}
+      <Helmet>
+        <title>Soundous</title>
+      </Helmet>
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
+      ) : (
+        <ProductDetails product={product} />
+      )}
     </div>
   );
 }
