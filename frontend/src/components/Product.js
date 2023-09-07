@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import Button from './UI/Button';
-import { Rating } from './Rating';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import Button from "./UI/Button";
+import { Rating } from "./Rating";
 
 export default function Product({ products }) {
-
   return (
     <div className="flex flex-wrap md:flex-nowrap gap-2 content-center justify-center text-center p-4">
       {products.map((prod) => (
@@ -20,12 +19,15 @@ export default function Product({ products }) {
             <Link to={`/products/${prod.slug}`}>
               <p>{prod.name}</p>
             </Link>
-            <Rating rating={prod.rating} numReviews={prod.numReviews}/>
+            <Rating rating={prod.rating} numReviews={prod.numReviews} />
             <p>
               <strong>{prod.price}</strong>
             </p>
           </div>
-          <Button>Add to Cart</Button>
+          <Button>
+            {" "}
+            <Link to={`/products/${prod.slug}`}>View Details</Link>
+          </Button>
         </div>
       ))}
     </div>

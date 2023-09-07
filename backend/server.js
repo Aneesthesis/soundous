@@ -1,5 +1,9 @@
 import express from "express";
 import data from "./data.js";
+import { config } from "dotenv";
+import mongoose from "mongoose";
+
+config();
 
 const app = express();
 
@@ -24,6 +28,13 @@ app.get("/api/products/x/:id", (req, res) => {
   }
   res.send(product);
 });
+
+mongoose
+  .connect(process.env.CONNECTION_URI, { dbName: "soundous" })
+  .then(() => {
+    console.log("MONGO JUMBO");
+  })
+  .catch((err) => console.log(err.message));
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {

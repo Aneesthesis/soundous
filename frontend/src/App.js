@@ -5,6 +5,7 @@ import { Cart } from "./components/UI/Cart";
 import { useContext } from "react";
 import { Store } from "./Store";
 import { CartPage } from "./pages/CartPage";
+import { SigninPage } from "./pages/SigninPage";
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
 
@@ -47,6 +48,7 @@ function App() {
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/products/:slug" element={<ProductPage />}></Route>
               <Route path="/cart" element={<CartPage />}></Route>
+              <Route path="/signin" element={<SigninPage />}></Route>
             </Routes>
           </section>
         </main>

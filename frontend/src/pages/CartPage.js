@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Store } from "../Store";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const CartPage = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
+  const navigate = useNavigate();
 
   const {
     cart: { cartItems },
@@ -28,6 +29,10 @@ export const CartPage = () => {
       type: "CART_REMOVE_ITEM",
       payload: item,
     });
+  };
+
+  const checkoutHandler = () => {
+    navigate("/signin?redirect=/shipping");
   };
   return (
     <div className="m-10">
@@ -79,6 +84,7 @@ export const CartPage = () => {
               0
             )}
             <button
+              onClick={checkoutHandler}
               disabled={cartItems.length === 0}
               className="bg-yellow-400 rounded-md mx-3 my-2 py-2 px-5 text-base border-x-yellow-950"
             >
