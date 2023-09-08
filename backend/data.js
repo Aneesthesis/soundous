@@ -1,7 +1,6 @@
 const data = {
   products: [
     {
-      _id: "1",
       name: "Logo Slim Shirt",
       slug: "logo-slim-shirt",
       category: "Shirts",
@@ -14,7 +13,6 @@ const data = {
       description: "high quality fabric",
     },
     {
-      _id: "2",
       name: "Logo Slim Skirt",
       slug: "logo-slim-skirt",
       category: "Skirts",
@@ -27,7 +25,6 @@ const data = {
       description: "high quality print",
     },
     {
-      _id: "3",
       name: "Fayd Regal Robes",
       slug: "fayd-regal-robes",
       category: "Robes",
