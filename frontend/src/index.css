@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* .checkout-steps > div {
+  border-bottom: 0.2rem solid gray;
+  color: gray;
+}
+
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid yellow;
+  color: yellow;
+} */

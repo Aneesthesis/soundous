@@ -6,6 +6,13 @@ import { useContext } from "react";
 import { Store } from "./Store";
 import { CartPage } from "./pages/CartPage";
 import { SigninPage } from "./pages/SigninPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ShippingAddressPage from "./pages/ShippingAddressPage";
+import { SignupPage } from "./pages/SignupPage";
+import { PaymentMethodPage } from "./pages/PaymentMethodPage";
+import { PlaceOrderPage } from "./pages/PlaceOrderPage";
+
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
 
@@ -20,12 +27,20 @@ function App() {
   //   fetchProducts()
   // }, []);
 
-  const { state } = useContext(Store);
-  const { cart } = state;
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+
+  function signoutHandler() {
+    ctxDispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
+  }
 
   return (
     <BrowserRouter>
       <div className="flex-col">
+        <ToastContainer className="bottom-2" limit={1} />
         <nav className="flex bg-stone-600 py-4 justify-between">
           <section className="navbar">
             <Link className="ml-2 text-amber-400 text-2xl" to="/">
@@ -39,6 +54,42 @@ function App() {
               </span>
               <Cart />
             </Link>
+            {userInfo ? (
+              // <div>
+              //   <select className="">
+              //     <option>{userInfo.name}</option>
+              //     <optgroup label="Navigation">
+              //       <option>
+              //         <Link to="/profile">User Profile</Link>
+              //       </option>
+              //       <option>
+              //         <Link to="/orderhistory">Order History</Link>
+              //       </option>
+              //     </optgroup>
+              //     <optgroup label="Actions">
+              //       <option>
+              //         <Link to="#signout" onClick={signoutHandler}>
+              //           Sign Out
+              //         </Link>
+              //       </option>
+              //     </optgroup>
+              //   </select>
+              // </div>
+              <div className="dropdown text-amber-300">
+                <button className="dropdown-button">Dropdown</button>
+                <div className="dropdown-content">
+                  <Link to="/profile">Link 1</Link>
+                  <Link to="/link2">Link 2</Link>
+                  <Link to="/#signout" onClick={signoutHandler}>
+                    Sign Out
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <Link to="/signin">Sign In</Link>
+              </div>
+            )}
           </div>
         </nav>
 
@@ -49,6 +100,11 @@ function App() {
               <Route path="/products/:slug" element={<ProductPage />}></Route>
               <Route path="/cart" element={<CartPage />}></Route>
               <Route path="/signin" element={<SigninPage />}></Route>
+              <Route path="/signup" element={<SignupPage />}></Route>
+              <Route path="/profile" element={<SigninPage />}></Route>
+              <Route path="/shipping" element={<ShippingAddressPage />}></Route>
+              <Route path="/payment" element={<PaymentMethodPage />}></Route>
+              <Route path="/placeorder" element={<PlaceOrderPage />}></Route>
             </Routes>
           </section>
         </main>

@@ -6,13 +6,16 @@ import { Store } from "../Store.js";
 import { toast } from "react-toastify";
 import { getError } from "../utils/getError.js";
 
-export const SigninPage = () => {
+export const SignupPage = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/";
+
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
 
@@ -23,10 +26,15 @@ export const SigninPage = () => {
     }
   }, [navigate, redirect, state.userInfo]);
 
-  const signinHandler = async (e) => {
+  const signupHandler = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("passwords do not match");
+      return;
+    }
     try {
-      const { data } = await axios.post("/api/users/signin", {
+      const { data } = await axios.post("/api/users/signup", {
+        name,
         email,
         password,
       });
@@ -41,16 +49,26 @@ export const SigninPage = () => {
   return (
     <div className="mt-8">
       <Helmet>
-        <title>Sign In</title>
+        <title>Sign Up</title>
       </Helmet>
 
       <form
-        onSubmit={signinHandler}
+        onSubmit={signupHandler}
         className="flex flex-col mx-4 md:mx-auto bg-stone-600 gap-y-4 border-2 sm:max-w-[75%] md:max-w-[23%] rounded-md py-5 px-6  items-center"
       >
         <h1 className="my-3 text-lg text-white font-semibold">
-          Sign In to Continue
+          Sign Up to Continue
         </h1>
+        <label htmlFor="name" />
+        <input
+          required="true"
+          className="border-2 outline-none h-8  rounded-md"
+          name="name"
+          placeholder="Name"
+          type="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <label htmlFor="email">
           <input
             required="true"
@@ -73,19 +91,29 @@ export const SigninPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
+        <label htmlFor="confirmPassword">
+          <input
+            required="true"
+            className="border-2 outline-none h-8 rounded-md"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </label>
 
         <button
           className="text-white bg-amber-400 py-1 px-4 rounded-md  border-[1px] active:bg-amber-500 mb-8 mt-3"
           type="submit"
         >
-          Sign In
+          Sign Up
         </button>
         <div className="text-white pb-4">
-          <strong>New Customer?</strong>
+          <strong>Already have an Account? </strong>
 
-          <Link className="underline" to={`/signup?redirect=${redirect}`}>
-            {" "}
-            Create a new Account
+          <Link className="underline" to={`/signin?redirect=${redirect}`}>
+            Sign In
           </Link>
         </div>
       </form>
