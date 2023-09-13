@@ -69,7 +69,7 @@ export const CartPage = () => {
                     <i className="fas fa-plus-circle"></i>
                   </button>
                 </div>
-                <div>{item.price * item.quantity}</div>
+                <div>&#8377;{item.price * item.quantity}</div>
                 <button onClick={() => removeItemHandler(item)}>
                   <i className="fas fa-trash mr-4"></i>
                 </button>
@@ -78,7 +78,7 @@ export const CartPage = () => {
           </ol>
           <div className="text-2xl border border-b-2 absolute w-[25%] right-[10%]">
             Subtotal ({cartItems.reduce((acc, curr) => acc + curr.quantity, 0)}{" "}
-            items):
+            items): &#8377;
             {cartItems.reduce(
               (acc, curr) => acc + curr.price * curr.quantity,
               0

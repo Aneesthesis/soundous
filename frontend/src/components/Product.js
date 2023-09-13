@@ -21,7 +21,7 @@ export default function Product({ products }) {
             </Link>
             <Rating rating={prod.rating} numReviews={prod.numReviews} />
             <p>
-              <strong>{prod.price}</strong>
+              <strong>&#8377;{prod.price}</strong>
             </p>
           </div>
           <Button>

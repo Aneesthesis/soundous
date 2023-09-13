@@ -29,7 +29,7 @@ export const ProductDetails = ({ product }) => {
       <div className="product-info flex flex-col gap-y-1 w-fit">
         <div className="font-bold text-2xl">{product.name}</div>
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <div>Price: {product.price}</div>
+        <div>Price: &#8377;{product.price}</div>
         <div>Description: {product.description}</div>
         <div>
           Status:{" "}
