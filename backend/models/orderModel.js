@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema(
       fullName: { type: String, required: true },
       address: { type: String, required: true },
       city: { type: String, required: true },
-      postalCode: { type: String, required: true },
+      PINCode: { type: String, required: true },
       country: { type: String, required: true },
     },
     paymentMethod: {
@@ -38,6 +38,7 @@ const orderSchema = new mongoose.Schema(
     taxes: { type: Number, required: true },
     finalAmount: { type: Number, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    orderedOn: { type: Date, default: Date.now() },
     isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
     isDelivered: { type: Boolean, default: false },

@@ -9,6 +9,9 @@ export default function ShippingAddressPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (state.cart.cartItems.length === 0) {
+      navigate("/cart");
+    }
     if (!state.userInfo) {
       navigate("/signin?redirect=/shipping");
     }

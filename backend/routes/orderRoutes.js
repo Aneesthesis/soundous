@@ -1,56 +1,45 @@
-// import express from "express";
-
-import { generateToken } from "../utils.js";
+import { isAuth } from "../utils.js";
 import expressAsyncHandler from "express-async-handler";
-import brcypt from "bcryptjs";
 
 import express from "express";
-import { User } from "../models/userModel.js";
+import { Order } from "../models/orderModel.js";
 
-export const userRouter = express.Router();
-
-userRouter.get("/", async (req, res) => {
-  const users = await User.find();
-  res.send(users);
-});
-
-userRouter.post(
-  "/signin",
+export const orderRouter = express.Router();
+orderRouter.post(
+  "/",
+  isAuth,
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findOne({ email: req.body.email });
-    if (user) {
-      if (brcypt.compareSync(req.body.password, user.password)) {
-        res.send({
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          isAdmin: user.isAdmin,
-          token: generateToken(user),
-        });
-        return;
-      }
-    }
-    res.status(401).send({ message: "Invalid email or password" });
+    const newOrder = new Order({
+      orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
+      shippingAddress: req.body.shippingAddress,
+      paymentMethod: req.body.paymentMethod,
+      itemsPrice: req.body.itemsPrice,
+      shippingPrice: req.body.shippingPrice,
+      taxes: req.body.taxes,
+      finalAmount: req.body.finalAmount,
+      user: req.user._id,
+      // isPaid: { type: Boolean, default: false },
+      // paidAt: { type: Date },
+      // isDelivered: { type: Boolean, default: false },
+      // deliveredAt: { type: Date },
+    });
+
+    const order = await newOrder.save();
+    res
+      .status(201)
+      .send({ message: "New Order Generated Successsfully", order });
   })
 );
 
-userRouter.post(
-  "/signup",
+orderRouter.get(
+  "/:id",
+  isAuth,
   expressAsyncHandler(async (req, res) => {
-    const newUser = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password: brcypt.hashSync(req.body.password),
-    });
-
-    const user = await newUser.save();
-
-    res.send({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken(user),
-    });
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      res.send(order);
+    } else {
+      res.status(404).send({ message: "Order Not Found" });
+    }
   })
 );

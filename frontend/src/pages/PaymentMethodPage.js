@@ -12,6 +12,9 @@ export const PaymentMethodPage = () => {
   } = state;
 
   useEffect(() => {
+    if (state.cart.cartItems.length === 0) {
+      navigate("/cart");
+    }
     if (!shippingAddress) {
       navigate("/shipping");
     }

@@ -47,6 +47,9 @@ export const PlaceOrderPage = () => {
   );
 
   useEffect(() => {
+    if (state.cart.cartItems.length === 0) {
+      navigate("/cart");
+    }
     if (!state.cart.paymentMethod) {
       navigate("/payment");
     }
@@ -75,7 +78,7 @@ export const PlaceOrderPage = () => {
       ctxDispatch({ type: "CLEAR_CART" });
       dispatch({ type: "ORDER_SUCCESS" });
       localStorage.removeItem("cartItems");
-      navigate(`/order/${data.order.id}`);
+      navigate(`/order/${data.order._id}`);
     } catch (error) {
       dispatch({ type: "ORDER_FAIL" });
       toast.error(getError(error));
@@ -157,7 +160,7 @@ export const PlaceOrderPage = () => {
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
             <li className="mx-6 flex justify-between">
-              <span>GST</span>
+              <span>GST(12%)</span>
               <span className="mr-8">&#8377;{state.cart.taxes}</span>
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>

@@ -12,6 +12,7 @@ import ShippingAddressPage from "./pages/ShippingAddressPage";
 import { SignupPage } from "./pages/SignupPage";
 import { PaymentMethodPage } from "./pages/PaymentMethodPage";
 import { PlaceOrderPage } from "./pages/PlaceOrderPage";
+import OrderPage from "./pages/OrderPage";
 
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
@@ -39,7 +40,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="flex-col">
+      <div className="flex-col max-h-screen">
         <ToastContainer className="bottom-2" limit={1} />
         <nav className="flex bg-stone-600 py-4 justify-between">
           <section className="navbar">
@@ -94,7 +95,7 @@ function App() {
         </nav>
 
         <main>
-          <section className="products-list min-h-screen">
+          <section className="products-list">
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/products/:slug" element={<ProductPage />}></Route>
@@ -105,12 +106,11 @@ function App() {
               <Route path="/shipping" element={<ShippingAddressPage />}></Route>
               <Route path="/payment" element={<PaymentMethodPage />}></Route>
               <Route path="/placeorder" element={<PlaceOrderPage />}></Route>
+              <Route path="/order/:id" element={<OrderPage />}></Route>
             </Routes>
           </section>
         </main>
-        <footer className="bg-stone-600 text-white text-center mt-2 p-1">
-          🍄 made in Asansol
-        </footer>
+        <footer></footer>
       </div>
     </BrowserRouter>
   );
