@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { ProductDetails } from "../components/ProductDetail";
 import { Helmet } from "react-helmet-async";
 import { getError } from "../utils/getError";
+import { LoadingBox } from "../components/UI/LoadingBox";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -46,7 +47,7 @@ export default function ProductPage() {
         <title>Soundous</title>
       </Helmet>
       {loading ? (
-        <div>Loading...</div>
+        <LoadingBox />
       ) : error ? (
         <div>{error}</div>
       ) : (

@@ -13,6 +13,8 @@ import { SignupPage } from "./pages/SignupPage";
 import { PaymentMethodPage } from "./pages/PaymentMethodPage";
 import { PlaceOrderPage } from "./pages/PlaceOrderPage";
 import OrderPage from "./pages/OrderPage";
+import { OrderHistoryPage } from "./pages/OrderHistoryPage";
+import { ProfileScreen } from "./pages/ProfileScreen";
 
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
@@ -102,11 +104,15 @@ function App() {
               <Route path="/cart" element={<CartPage />}></Route>
               <Route path="/signin" element={<SigninPage />}></Route>
               <Route path="/signup" element={<SignupPage />}></Route>
-              <Route path="/profile" element={<SigninPage />}></Route>
+              <Route path="/profile" element={<ProfileScreen />}></Route>
               <Route path="/shipping" element={<ShippingAddressPage />}></Route>
               <Route path="/payment" element={<PaymentMethodPage />}></Route>
               <Route path="/placeorder" element={<PlaceOrderPage />}></Route>
               <Route path="/order/:id" element={<OrderPage />}></Route>
+              <Route
+                path="/orderhistory"
+                element={<OrderHistoryPage />}
+              ></Route>
             </Routes>
           </section>
         </main>

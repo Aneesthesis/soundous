@@ -1,6 +1,7 @@
-import Alert from 'react-bootstrap/Alert'
-export function MessageBox(props){
-    return(
-        <Alert variant={props.variant || 'info'}>{props.children}</Alert>
-    )
+export function MessageBox(props) {
+  return (
+    <div className="error-message-box">
+      <p>{props.children}</p>
+    </div>
+  );
 }

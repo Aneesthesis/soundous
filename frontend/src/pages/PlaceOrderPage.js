@@ -86,7 +86,7 @@ export const PlaceOrderPage = () => {
   };
 
   return (
-    <div className="mx-4 flex flex-col md:flex-row justify-around">
+    <div className="mx-4 flex flex-col md:flex-row justify-evenly">
       <div className="flex flex-col gap-y-5">
         <CheckoutProgress step1 step2 step3 step4></CheckoutProgress>
         <Helmet>
@@ -143,10 +143,10 @@ export const PlaceOrderPage = () => {
         </section>
       </div>
       <div>
-        <section className="border max-w-2xl mt-6 md:mt-28 px-4">
+        <section className="border mt-6 md:mt-28 px-4">
           <h2 className="text-xl font-semibold my-2">Order Summary</h2>
           <ol>
-            <li className="mx-6 flex justify-between">
+            <li className="mx-6 flex justify-between gap-x-4">
               <span>Items</span>
               <span className="mr-8">
                 &#8377;
@@ -154,24 +154,24 @@ export const PlaceOrderPage = () => {
               </span>
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
-            <li className="mx-6 flex justify-between">
+            <li className="mx-6 flex justify-between gap-x-4">
               <span>Shipping Charges</span>
               <span className="mr-8">&#8377;{state.cart.shippingPrice}</span>
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
-            <li className="mx-6 flex justify-between">
+            <li className="mx-6 flex justify-between gap-x-4">
               <span>GST(12%)</span>
               <span className="mr-8">&#8377;{state.cart.taxes}</span>
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
-            <li className="mx-6 flex justify-between">
-              <span>Final Amount</span>
+            <li className="mx-6 flex justify-between gap-x-4">
+              <span>Final Amount </span>
               <span className="mr-8">&#8377;{state.cart.finalAmount}</span>
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
             <button
               onClick={PlaceOrderHandler}
-              className="bg-yellow-400 active:bg-yellow-500 ml-[84px] md:ml-12 my-2 py-1 px-6 border-[1px] border-slate-500 rounded-md "
+              className=" ml-[25%] bg-yellow-400 active:bg-yellow-500 my-2 py-1 px-6 border-[1px] border-slate-500 rounded-md "
             >
               Place Order
             </button>

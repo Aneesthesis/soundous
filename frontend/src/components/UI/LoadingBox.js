@@ -1,8 +1,9 @@
-import Spinner from 'react-bootstrap/Spinner'
-export function LoadingBox(){
-    return (
-        <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading.....</span>
-        </Spinner>
-    )
-}
+import React from "react";
+
+export const LoadingBox = () => {
+  return (
+    <div className="loading-spinner-container">
+      <div className="loading-spinner"></div>
+    </div>
+  );
+};
