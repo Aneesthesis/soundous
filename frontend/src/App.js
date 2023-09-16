@@ -46,7 +46,7 @@ function App() {
         <ToastContainer className="bottom-2" limit={1} />
         <nav className="flex bg-stone-600 py-4 justify-between">
           <section className="navbar">
-            <Link className="ml-2 text-amber-400 text-2xl" to="/">
+            <Link className="ml-2 text-yellow-400 text-2xl" to="/">
               Soundous
             </Link>
           </section>
@@ -58,28 +58,8 @@ function App() {
               <Cart />
             </Link>
             {userInfo ? (
-              // <div>
-              //   <select className="">
-              //     <option>{userInfo.name}</option>
-              //     <optgroup label="Navigation">
-              //       <option>
-              //         <Link to="/profile">User Profile</Link>
-              //       </option>
-              //       <option>
-              //         <Link to="/orderhistory">Order History</Link>
-              //       </option>
-              //     </optgroup>
-              //     <optgroup label="Actions">
-              //       <option>
-              //         <Link to="#signout" onClick={signoutHandler}>
-              //           Sign Out
-              //         </Link>
-              //       </option>
-              //     </optgroup>
-              //   </select>
-              // </div>
-              <div className="dropdown text-amber-300">
-                <button className="dropdown-button">Dropdown</button>
+              <div className="dropdown text-yellow-300">
+                <button className="dropdown-button">{userInfo.name}</button>
                 <div className="dropdown-content">
                   <Link to="/profile">Link 1</Link>
                   <Link to="/link2">Link 2</Link>

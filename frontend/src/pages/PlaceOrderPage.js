@@ -86,7 +86,7 @@ export const PlaceOrderPage = () => {
   };
 
   return (
-    <div className="mx-4 flex flex-col md:flex-row justify-evenly">
+    <div className="mx-4 mb-4 flex flex-col md:flex-row justify-evenly">
       <div className="flex flex-col gap-y-5">
         <CheckoutProgress step1 step2 step3 step4></CheckoutProgress>
         <Helmet>

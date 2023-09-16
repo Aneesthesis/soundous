@@ -16,12 +16,12 @@ export function ProfileScreen() {
   function formSubmitHandler() {}
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center h-screen">
       <Helmet>User Profile</Helmet>
-      <h1 className="text-3xl"></h1>
+      <h1 className="text-3xl mb-4">Your Profile</h1>
       <form
         onSubmit={formSubmitHandler}
-        className="w-[30%] md:max-w-md mx-auto"
+        className="w-[80%] md:max-w-md mx-auto p-4 border rounded-md shadow-lg"
       >
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700">
@@ -34,7 +34,7 @@ export function ProfileScreen() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
           />
         </div>
         <div className="mb-4">
@@ -48,7 +48,7 @@ export function ProfileScreen() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
           />
         </div>
         <div className="mb-4">
@@ -62,7 +62,7 @@ export function ProfileScreen() {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
           />
         </div>
         <div className="mb-6">
@@ -76,13 +76,13 @@ export function ProfileScreen() {
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
           />
         </div>
         <div className="text-center">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="bg-yellow-500 border-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           >
             Update
           </button>

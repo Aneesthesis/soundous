@@ -30,36 +30,42 @@ export const PaymentMethodPage = () => {
   };
   return (
     <div className="flex flex-col items-center gap-y-5 mt-10">
-      {" "}
-      <CheckoutProgress step1 step2 step3></CheckoutProgress>
-      <div>
+      <CheckoutProgress step1 step2 step3 />
+      <div className="bg-white p-6 rounded-md shadow-lg max-w-md">
         <Helmet>
           <title>Payment Method</title>
         </Helmet>
-        <h1 className="text-3xl mb-4">Payment Method</h1>
+        <h1 className="text-3xl mb-4">Select a Payment Method</h1>
         <form
-          className="flex flex-col gap-y-3"
+          className="flex flex-col gap-y-4"
           onSubmit={confirmPaymentHandler}
         >
-          <label>
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
+              id="paypal"
               value="PayPal"
               checked={paymentMethodName === "PayPal"}
               onChange={(e) => setPaymentMethod(e.target.value)}
+              className="text-amber-500"
             />
-            PayPal
+            <span className="text-lg font-semibold">PayPal</span>
           </label>
-          <label>
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
+              id="stripe"
               value="Stripe"
               checked={paymentMethodName === "Stripe"}
               onChange={(e) => setPaymentMethod(e.target.value)}
+              className="text-amber-500"
             />
-            Stripe
+            <span className="text-lg font-semibold">Stripe</span>
           </label>
-          <button className="bg-yellow-400 active:bg-yellow-500 w-fit py-1 px-2 rounded-md mx-auto">
+          <button
+            className="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded-md mx-auto w-max transition duration-300 ease-in-out transform hover:scale-105"
+            type="submit"
+          >
             Confirm
           </button>
         </form>

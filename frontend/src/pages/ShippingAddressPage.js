@@ -57,50 +57,94 @@ export default function ShippingAddressPage() {
     navigate("/payment");
   }
   return (
-    <div className="flex flex-col items-center gap-y-5 mt-10">
+    <div className="flex flex-col items-center justify-center h-screen">
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>
       <CheckoutProgress step1 step2></CheckoutProgress>
-      <h1 className="text-3xl">Shipping Address</h1>
-      <form className="flex flex-col gap-y-3" onSubmit={SubmitAddressHandler}>
-        <input
-          className="border rounded-md h-8 outline-none border-amber-500"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          placeholder="Full Name"
-        ></input>
-        <label></label>
-        <input
-          className="border rounded-md h-8 outline-none border-amber-500"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          placeholder="Address"
-        ></input>
-        <label></label>
-        <input
-          className="border rounded-md h-8 outline-none border-amber-500"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="City"
-        ></input>
-        <label></label>
-        <input
-          className="border rounded-md h-8 outline-none border-amber-500"
-          value={PINCode}
-          onChange={(e) => setPINCode(e.target.value)}
-          placeholder="PIN CODE"
-        ></input>
-        <label></label>
-        <input
-          className="border rounded-md h-8 outline-none border-amber-500"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          placeholder="Country"
-        ></input>
-        <button className="bg-yellow-400 active:bg-yellow-500 w-fit py-1 px-2 rounded-md mx-auto">
-          Continue
-        </button>
+      <h1 className="text-3xl my-4">Shipping Address</h1>
+      <form
+        className="w-[80%] md:max-w-md mx-auto p-4 border rounded-md shadow-lg"
+        onSubmit={SubmitAddressHandler}
+      >
+        <div className="mb-4">
+          <label htmlFor="fullName" className="block text-gray-700">
+            Full Name
+          </label>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Edit Name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            required
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="address" className="block text-gray-700">
+            Address
+          </label>
+          <input
+            type="text"
+            id="address"
+            placeholder="Edit Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="city" className="block text-gray-700">
+            City
+          </label>
+          <input
+            type="text"
+            id="city"
+            placeholder="Edit City"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="PINCode" className="block text-gray-700">
+            PIN CODE
+          </label>
+          <input
+            type="text"
+            id="PINCode"
+            placeholder="Edit PIN CODE"
+            value={PINCode}
+            onChange={(e) => setPINCode(e.target.value)}
+            required
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="country" className="block text-gray-700">
+            Country
+          </label>
+          <input
+            type="text"
+            id="country"
+            placeholder="Edit Country"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            required
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+          />
+        </div>
+        <div className="text-center">
+          <button
+            type="submit"
+            className="bg-yellow-500 border-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+          >
+            Continue
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -35,58 +35,82 @@ export const CartPage = () => {
     navigate("/signin?redirect=/shipping");
   };
   return (
-    <div className="m-10">
+    <div className="m-8 md:mx-48">
       <h1 className="text-2xl font-semibold mb-5">Shopping Cart</h1>
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>
       {cartItems.length === 0 ? (
-        <div className="bg-blue-100 text-indigo-500 mx-auto w-fit px-10 py-2">
+        <div className=" bg-blue-100 text-indigo-500 mx-auto w-fit px-10 py-2 rounded-md">
           Cart is empty.{" "}
-          <Link className="underline" to="/">
+          <Link className="underline text-blue-700" to="/">
             Go Shopping
           </Link>
         </div>
       ) : (
-        <div className="flex sm:flex-col lg:flex-row relative lg:justify-between">
-          <ol className="absolute lg:w-[60%] sm:w-[80%] flex-1">
+        <div className="flex flex-col gap-y-4 md:flex-row md:gap-x-4 justify-between">
+          <ol className="cart-items w-full lg:w-3/4 space-y-4">
             {cartItems.map((item) => (
-              <li className="flex items-center justify-between  border border-b-2 font-bold">
-                <img className="w-[60px]" src={item.image} />
-                <Link to={`/products/${item.slug}`}>{item.name}</Link>
-                <div className="flex gap-x-2">
+              <li
+                key={item.id}
+                className="flex items-center justify-between border-b-2 pb-2"
+              >
+                <div className="flex items-center">
+                  <img
+                    className="w-16 h-16 object-cover mr-4"
+                    src={item.image}
+                    alt={item.name}
+                  />
+                  <Link
+                    to={`/products/${item.slug}`}
+                    className="text-blue-700 hover:underline"
+                  >
+                    {item.name}
+                  </Link>
+                </div>
+                <div className="flex items-center">
                   <button
                     onClick={() => updateCartHandler(item, item.quantity - 1)}
                     disabled={item.quantity === 1}
+                    className="text-gray-600 hover:text-gray-800"
                   >
                     <i className="fas fa-minus-circle"></i>
                   </button>
-                  <span>{item.quantity}</span>
+                  <span className="mx-2">{item.quantity}</span>
                   <button
                     onClick={() => updateCartHandler(item, item.quantity + 1)}
                     disabled={item.quantity === item.countInStock}
+                    className="text-gray-600 hover:text-gray-800"
                   >
                     <i className="fas fa-plus-circle"></i>
                   </button>
                 </div>
-                <div>&#8377;{item.price * item.quantity}</div>
-                <button onClick={() => removeItemHandler(item)}>
-                  <i className="fas fa-trash mr-4"></i>
+                <div className="font-semibold text-lg">
+                  &#8377;{item.price * item.quantity}
+                </div>
+                <button
+                  onClick={() => removeItemHandler(item)}
+                  className="text-red-600 hover:text-red-800"
+                >
+                  <i className="fas fa-trash"></i>
                 </button>
               </li>
             ))}
           </ol>
-          <div className="text-2xl border border-b-2 absolute w-[25%] right-[10%]">
+          <div className="subtotal text-xl font-semibold bg-gray-100 w-full lg:w-1/4 p-4">
             Subtotal ({cartItems.reduce((acc, curr) => acc + curr.quantity, 0)}{" "}
-            items): &#8377;
-            {cartItems.reduce(
-              (acc, curr) => acc + curr.price * curr.quantity,
-              0
-            )}
+            items):{" "}
+            <span className="text-blue-700">
+              &#8377;
+              {cartItems.reduce(
+                (acc, curr) => acc + curr.price * curr.quantity,
+                0
+              )}
+            </span>
             <button
               onClick={checkoutHandler}
               disabled={cartItems.length === 0}
-              className="bg-yellow-400 rounded-md mx-3 my-2 py-2 px-5 text-base border-x-yellow-950"
+              className="bg-yellow-400 text-white rounded-md py-2 px-5 my-4 text-lg hover:bg-yellow-500"
             >
               Proceed to Checkout
             </button>

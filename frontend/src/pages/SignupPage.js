@@ -47,72 +47,77 @@ export const SignupPage = () => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="flex flex-col items-center gap-y-5 my-5">
       <Helmet>
         <title>Sign Up</title>
       </Helmet>
-
       <form
         onSubmit={signupHandler}
-        className="flex flex-col mx-4 md:mx-auto bg-stone-600 gap-y-4 border-2 sm:max-w-[75%] md:max-w-[23%] rounded-md py-5 px-6  items-center"
+        className="max-w-xs mx-auto p-4 border rounded-md shadow-lg"
       >
-        <h1 className="my-3 text-lg text-white font-semibold">
-          Sign Up to Continue
-        </h1>
-        <label htmlFor="name" />
+        <h1 className="text-3xl mb-3">Sign Up to Continue</h1>
+        <label htmlFor="name" className="text-gray-700">
+          Name
+        </label>
         <input
-          required="true"
-          className="border-2 outline-none h-8  rounded-md"
+          required
+          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-amber-400"
           name="name"
           placeholder="Name"
           type="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <label htmlFor="email">
-          <input
-            required="true"
-            className="border-2 outline-none h-8  rounded-md"
-            name="email"
-            placeholder="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <label htmlFor="email" className="text-gray-700">
+          Email
         </label>
-        <label htmlFor="password">
-          <input
-            required="true"
-            className="border-2 outline-none h-8 rounded-md"
-            name="password"
-            placeholder="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <input
+          required
+          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-amber-400"
+          name="email"
+          placeholder="Email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <label htmlFor="password" className="text-gray-700">
+          Password
         </label>
-        <label htmlFor="confirmPassword">
-          <input
-            required="true"
-            className="border-2 outline-none h-8 rounded-md"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+        <input
+          required
+          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-amber-400"
+          name="password"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <label htmlFor="confirmPassword" className="text-gray-700">
+          Confirm Password
         </label>
-
-        <button
-          className="text-white bg-amber-400 py-1 px-4 rounded-md  border-[1px] active:bg-amber-500 mb-8 mt-3"
-          type="submit"
-        >
-          Sign Up
-        </button>
-        <div className="text-white pb-4">
+        <input
+          required
+          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-amber-400"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        <div className="flex justify-center">
+          <button
+            className="bg-amber-400 hover:bg-amber-500 focus:bg-amber-400 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            type="submit"
+          >
+            Sign Up
+          </button>
+        </div>
+        <div className="py-4">
           <strong>Already have an Account? </strong>
-
-          <Link className="underline" to={`/signin?redirect=${redirect}`}>
+          <Link
+            className="underline text-amber-500 hover:text-amber-700"
+            to={`/signin?redirect=${redirect}`}
+          >
             Sign In
           </Link>
         </div>
