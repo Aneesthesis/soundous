@@ -38,6 +38,8 @@ function reducer(state, action) {
       const cartItems = state.cart.cartItems.filter(
         (item) => item._id !== action.payload._id
       );
+      // Update Cart in local Storage
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case "CLEAR_CART": {

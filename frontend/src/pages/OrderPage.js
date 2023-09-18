@@ -143,6 +143,7 @@ export default function OrderPage() {
           <section className="border my-4 px-4">
             <h3 className="text-xl font-semibold mb-2">Shipping</h3>
             <span className="font-bold">Name</span>:{" "}
+            {order.shippingAddress.fullName} <br />
             <span className="font-bold">Address</span>:
             {order.shippingAddress.address} {order.shippingAddress.city}
             {order.shippingAddress.PINCode}

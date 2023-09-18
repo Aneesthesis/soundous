@@ -61,7 +61,7 @@ export const SignupPage = () => {
         </label>
         <input
           required
-          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-amber-400"
+          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-yellow-400"
           name="name"
           placeholder="Name"
           type="name"
@@ -73,7 +73,7 @@ export const SignupPage = () => {
         </label>
         <input
           required
-          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-amber-400"
+          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-yellow-400"
           name="email"
           placeholder="Email"
           type="email"
@@ -85,7 +85,7 @@ export const SignupPage = () => {
         </label>
         <input
           required
-          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-amber-400"
+          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-yellow-400"
           name="password"
           placeholder="Password"
           type="password"
@@ -97,7 +97,7 @@ export const SignupPage = () => {
         </label>
         <input
           required
-          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-amber-400"
+          className="border rounded-md h-8 outline-none px-4 py-2 w-full mb-4 focus:border-yellow-400"
           name="confirmPassword"
           placeholder="Confirm Password"
           type="password"
@@ -106,7 +106,7 @@ export const SignupPage = () => {
         />
         <div className="flex justify-center">
           <button
-            className="bg-amber-400 hover:bg-amber-500 focus:bg-amber-400 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-400 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
             type="submit"
           >
             Sign Up
@@ -115,7 +115,7 @@ export const SignupPage = () => {
         <div className="py-4">
           <strong>Already have an Account? </strong>
           <Link
-            className="underline text-amber-500 hover:text-amber-700"
+            className="underline text-yellow-500 hover:text-yellow-700"
             to={`/signin?redirect=${redirect}`}
           >
             Sign In

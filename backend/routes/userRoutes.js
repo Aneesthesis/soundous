@@ -1,8 +1,8 @@
 // import express from "express";
 
-import { generateToken } from "../utils.js";
+import { generateToken, isAuth } from "../utils.js";
 import expressAsyncHandler from "express-async-handler";
-import brcypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 import express from "express";
 import { User } from "../models/userModel.js";
@@ -19,7 +19,7 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      if (brcypt.compareSync(req.body.password, user.password)) {
+      if (bcrypt.compareSync(req.body.password, user.password)) {
         res.send({
           _id: user._id,
           name: user.name,
@@ -40,7 +40,7 @@ userRouter.post(
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
-      password: brcypt.hashSync(req.body.password),
+      password: bcrypt.hashSync(req.body.password),
     });
 
     const user = await newUser.save();
@@ -52,5 +52,30 @@ userRouter.post(
       isAdmin: user.isAdmin,
       token: generateToken(user),
     });
+  })
+);
+
+userRouter.put(
+  `/profile`,
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+      if (req.body.password) {
+        user.password = bcrypt.hashSync(req.body.password);
+      }
+      const updatedUser = await user.save();
+      res.send({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        isAdmin: updatedUser.isAdmin,
+        token: generateToken(updatedUser),
+      });
+    } else {
+      res.status(404).send({ message: `User not Found` });
+    }
   })
 );

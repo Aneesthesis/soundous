@@ -1,7 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import { Store } from "../Store";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { toast } from "react-toastify";
+import { getError } from "../utils/getError";
+import axios from "axios";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "UPDATE_REQ":
+      return { ...state, loadingUpdate: true };
+    case "UPDATE_SUCCESS":
+      return { ...state, loadingUpdate: false };
+    case "UPDATE_FAIL":
+      return { ...state, loadingUpdate: false };
+
+    default:
+      return state;
+  }
+}
 
 export function ProfileScreen() {
   const navigate = useNavigate();
@@ -13,7 +30,31 @@ export function ProfileScreen() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  function formSubmitHandler() {}
+  const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
+    loadingUpdate: false,
+  });
+
+  async function formSubmitHandler(e) {
+    e.preventDefault();
+    try {
+      if (newPassword !== confirmNewPassword) {
+        return toast.error("passwords did not match");
+      }
+      dispatch({ type: "UPDATE_REQ" });
+      const { data } = await axios.put(
+        `/api/users/profile`,
+        { name, email, password: newPassword },
+        { headers: { authorization: `Bearer ${userInfo.token}` } }
+      );
+      dispatch({ type: `UPDATE_SUCCESS` });
+      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem(`userInfo`, JSON.stringify(data));
+      toast.success("User Updated Successfully");
+    } catch (error) {
+      dispatch({ type: "UPDATE_FAIL" });
+      toast.error(getError(error));
+    }
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">

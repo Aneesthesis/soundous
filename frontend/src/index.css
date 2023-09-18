@@ -43,3 +43,29 @@
 .error-message-box p {
   margin: 0;
 }
+
+/* sidebar*/
+.active-cont {
+  margin-left: 240px;
+}
+
+.side-container {
+  transition: 0.4s;
+}
+
+.active-nav {
+  left: 0;
+}
+
+.side_navbar {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  left: -300px;
+  background-color: #100901;
+  transition: 0.5s;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
