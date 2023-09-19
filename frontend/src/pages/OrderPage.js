@@ -133,7 +133,7 @@ export default function OrderPage() {
   ) : (
     order &&
     order.shippingAddress && (
-      <div className="max-w-6xl mx-20 flex flex-col md:flex-row md:gap-x-8">
+      <div className="max-w-6xl mx:5 md:mx-20 flex flex-col md:flex-row md:gap-x-8">
         <div>
           <section className="text-2xl font-bold my-6">
             Order #{order._id} <br />
@@ -189,7 +189,7 @@ export default function OrderPage() {
                     {item.name}
                   </Link>
                   <div>{item.quantity}</div>
-                  <div>&#8377;{item.price * item.quantity}</div>
+                  <div>$;{item.price * item.quantity}</div>
                 </li>
               ))}
             </div>
@@ -203,24 +203,24 @@ export default function OrderPage() {
               <li className="mx-6 flex justify-between">
                 <span>Items</span>
                 <span className="mr-8">
-                  &#8377;
+                  $;
                   {order.itemsPrice}
                 </span>
               </li>
               <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
               <li className="mx-6 flex justify-between">
                 <span>Shipping Charges</span>
-                <span className="mr-8">&#8377;{order.shippingPrice}</span>
+                <span className="mr-8">$;{order.shippingPrice}</span>
               </li>
               <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
               <li className="mx-6 flex justify-between">
                 <span>GST</span>
-                <span className="mr-8">&#8377;{order.taxes}</span>
+                <span className="mr-8">$;{order.taxes}</span>
               </li>
               <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
               <li className="mx-6 flex justify-between">
                 <span>Order Total</span>
-                <span className="mr-8">&#8377;{order.finalAmount}</span>
+                <span className="mr-8">$;{order.finalAmount}</span>
               </li>
               {!order.isPaid && (
                 <li>

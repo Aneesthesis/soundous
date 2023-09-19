@@ -20,6 +20,7 @@ import { DownArrowIcon } from "./components/UI/DownArrow";
 import { getError } from "./utils/getError";
 import axios from "axios";
 import { SearchBox } from "./components/SearchBox";
+import { SearchPage } from "./pages/SearchPage";
 
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
@@ -157,7 +158,7 @@ function App() {
         </div>
 
         <main>
-          <section className="main mr-5">
+          <section className="main">
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/products/:slug" element={<ProductPage />}></Route>
@@ -173,6 +174,7 @@ function App() {
                 path="/orderhistory"
                 element={<OrderHistoryPage />}
               ></Route>
+              <Route path="/search" element={<SearchPage />}></Route>
             </Routes>
           </section>
         </main>

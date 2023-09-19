@@ -86,7 +86,7 @@ export const CartPage = () => {
                   </button>
                 </div>
                 <div className="font-semibold text-lg">
-                  &#8377;{item.price * item.quantity}
+                  $;{item.price * item.quantity}
                 </div>
                 <button
                   onClick={() => removeItemHandler(item)}
@@ -101,7 +101,7 @@ export const CartPage = () => {
             Subtotal ({cartItems.reduce((acc, curr) => acc + curr.quantity, 0)}{" "}
             items):{" "}
             <span className="text-blue-700">
-              &#8377;
+              $;
               {cartItems.reduce(
                 (acc, curr) => acc + curr.price * curr.quantity,
                 0

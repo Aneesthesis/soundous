@@ -36,9 +36,7 @@ export const ProductDetails = ({ product }) => {
             {product.name}
           </div>
           <Rating rating={product.rating} numReviews={product.numReviews} />
-          <div className="text-gray-700 text-lg">
-            Price: &#8377;{product.price}
-          </div>
+          <div className="text-gray-700 text-lg">Price: $;{product.price}</div>
           <div className="text-gray-700 text-lg">
             Description: {product.description}
           </div>
