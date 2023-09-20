@@ -130,7 +130,7 @@ export const PlaceOrderPage = () => {
                 {item.name}
               </Link>
               <div>{item.quantity}</div>
-              <div>$;{item.price * item.quantity}</div>
+              <div>${item.price * item.quantity}</div>
             </li>
           ))}
           <br />
@@ -148,25 +148,22 @@ export const PlaceOrderPage = () => {
           <ol>
             <li className="mx-6 flex justify-between gap-x-4">
               <span>Items</span>
-              <span className="mr-8">
-                $;
-                {state.cart.itemsPrice}
-              </span>
+              <span className="mr-8">${state.cart.itemsPrice}</span>
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
             <li className="mx-6 flex justify-between gap-x-4">
               <span>Shipping Charges</span>
-              <span className="mr-8">$;{state.cart.shippingPrice}</span>
+              <span className="mr-8">${state.cart.shippingPrice}</span>
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
             <li className="mx-6 flex justify-between gap-x-4">
               <span>GST(12%)</span>
-              <span className="mr-8">$;{state.cart.taxes}</span>
+              <span className="mr-8">${state.cart.taxes}</span>
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
             <li className="mx-6 flex justify-between gap-x-4">
               <span>Final Amount </span>
-              <span className="mr-8">$;{state.cart.finalAmount}</span>
+              <span className="mr-8">${state.cart.finalAmount}</span>
             </li>
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
             <button

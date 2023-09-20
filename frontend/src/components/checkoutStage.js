@@ -25,7 +25,7 @@ export const CheckoutProgress = (props) => {
 
   return (
     <div>
-      <div className="flex justify-around gap-x-4 md:gap-x-44">
+      <div className=" flex justify-around gap-x-4 md:gap-x-44">
         <div className={props.step1 ? "text-yellow-400" : "text-gray-400"}>
           Sign In
         </div>
@@ -39,7 +39,7 @@ export const CheckoutProgress = (props) => {
           Order Placed
         </div>
       </div>
-      <div className="relative ">
+      <div className=" ">
         <div className="h-2 bg-gray-200 w-full rounded-full">
           {/* Completed progress */}
           <div

@@ -189,7 +189,7 @@ export default function OrderPage() {
                     {item.name}
                   </Link>
                   <div>{item.quantity}</div>
-                  <div>$;{item.price * item.quantity}</div>
+                  <div>${item.price * item.quantity}</div>
                 </li>
               ))}
             </div>
@@ -202,25 +202,22 @@ export default function OrderPage() {
             <ol>
               <li className="mx-6 flex justify-between">
                 <span>Items</span>
-                <span className="mr-8">
-                  $;
-                  {order.itemsPrice}
-                </span>
+                <span className="mr-8">${order.itemsPrice}</span>
               </li>
               <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
               <li className="mx-6 flex justify-between">
                 <span>Shipping Charges</span>
-                <span className="mr-8">$;{order.shippingPrice}</span>
+                <span className="mr-8">${order.shippingPrice}</span>
               </li>
               <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
               <li className="mx-6 flex justify-between">
                 <span>GST</span>
-                <span className="mr-8">$;{order.taxes}</span>
+                <span className="mr-8">${order.taxes}</span>
               </li>
               <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
               <li className="mx-6 flex justify-between">
                 <span>Order Total</span>
-                <span className="mr-8">$;{order.finalAmount}</span>
+                <span className="mr-8">${order.finalAmount}</span>
               </li>
               {!order.isPaid && (
                 <li>

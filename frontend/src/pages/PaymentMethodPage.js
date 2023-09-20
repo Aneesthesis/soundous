@@ -63,7 +63,7 @@ export const PaymentMethodPage = () => {
             <span className="text-lg font-semibold">Stripe</span>
           </label>
           <button
-            className="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded-md mx-auto w-max transition duration-300 ease-in-out transform hover:scale-105"
+            className="w-fit mx-auto bg-yellow-500 border-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
             type="submit"
           >
             Confirm
