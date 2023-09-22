@@ -5,6 +5,7 @@ import { seedRouter } from "./routes/seedRoutes.js";
 import { productRouter } from "./routes/productRoutes.js";
 import { userRouter } from "./routes/userRoutes.js";
 import { orderRouter } from "./routes/orderRoutes.js";
+import { adminRouter } from "./routes/adminRoutes.js";
 
 config();
 
@@ -17,6 +18,7 @@ app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/admin", adminRouter);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });

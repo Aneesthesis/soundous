@@ -16,23 +16,21 @@ import { PlaceOrderPage } from "./pages/PlaceOrderPage";
 import OrderPage from "./pages/OrderPage";
 import { OrderHistoryPage } from "./pages/OrderHistoryPage";
 import { ProfileScreen } from "./pages/ProfileScreen";
-import { DownArrowIcon } from "./components/UI/DownArrow";
 import { getError } from "./utils/getError";
 import axios from "axios";
 import { SearchBox } from "./components/SearchBox";
 import { SearchPage } from "./pages/SearchPage";
 import { Footer } from "./components/Footer";
-
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 function App() {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isAdminDropdownOpen, setAdminDropdownOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
   // Function to toggle the dropdown
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
+  const toggleAdminDropdown = () => {
+    setAdminDropdownOpen(!isAdminDropdownOpen);
   };
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -95,7 +93,7 @@ function App() {
         </nav>
 
         <div
-          className={`top-[72px] max-h-screen ${
+          className={`top-[65px] max-h-screen ${
             sidebarIsOpen ? "left-0" : "-left-[300px] "
           } w-[300px] h-full border-r border-gray-200 bg-white text-gray-700 absolute top-0 transition-all duration-500 ease-in-out`}
         >
@@ -116,6 +114,40 @@ function App() {
             )}
 
             <ul className="space-y-2">
+              {userInfo && userInfo.isAdmin && (
+                <div
+                  className="space-y-2"
+                  title="Admin"
+                  id="admin-nav-dropdown"
+                >
+                  <h2 className="text-base font-semibold">Admin Menu</h2>
+                  <Link
+                    className="block px-2 py-1 text-sm hover:text-blue-500"
+                    to="/admin-dashboard"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    className="block px-2 py-1 text-sm hover:text-blue-500"
+                    to="/productlist"
+                  >
+                    Products
+                  </Link>
+                  <Link
+                    className="block px-2 py-1 text-sm hover:text-blue-500"
+                    to="/orderlist"
+                  >
+                    Orders
+                  </Link>
+                  <Link
+                    className="block px-2 py-1 text-sm hover:text-blue-500"
+                    to="/userlist"
+                  >
+                    Users
+                  </Link>
+                  <h2 className="text-base font-semibold mt-4">User Menu</h2>
+                </div>
+              )}
               {userInfo && (
                 <li>
                   {" "}
@@ -171,16 +203,38 @@ function App() {
               <Route path="/cart" element={<CartPage />}></Route>
               <Route path="/signin" element={<SigninPage />}></Route>
               <Route path="/signup" element={<SignupPage />}></Route>
-              <Route path="/profile" element={<ProfileScreen />}></Route>
               <Route path="/shipping" element={<ShippingAddressPage />}></Route>
               <Route path="/payment" element={<PaymentMethodPage />}></Route>
               <Route path="/placeorder" element={<PlaceOrderPage />}></Route>
-              <Route path="/order/:id" element={<OrderPage />}></Route>
+              <Route path="/search" element={<SearchPage />}></Route>
+              <Route
+                path="/admin-dashboard"
+                element={<AdminDashboard />}
+              ></Route>
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <ProfileScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              <Route
+                path="/order/:id"
+                element={
+                  <ProtectedRoute>
+                    <OrderPage />
+                  </ProtectedRoute>
+                }
+              ></Route>
               <Route
                 path="/orderhistory"
-                element={<OrderHistoryPage />}
+                element={
+                  <ProtectedRoute>
+                    <OrderHistoryPage />
+                  </ProtectedRoute>
+                }
               ></Route>
-              <Route path="/search" element={<SearchPage />}></Route>
             </Routes>
           </section>
         </main>
