@@ -38,14 +38,13 @@ const orderSchema = new mongoose.Schema(
     taxes: { type: Number, required: true },
     finalAmount: { type: Number, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    orderedOn: { type: Date, default: Date.now() },
     isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
     isDelivered: { type: Boolean, default: false },
     deliveredAt: { type: Date },
   },
   {
-    timeStamps: true,
+    timestamps: true,
   }
 );
 

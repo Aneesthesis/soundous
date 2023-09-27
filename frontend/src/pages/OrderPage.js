@@ -27,20 +27,41 @@ function reducer(state, action) {
     case "PAY_RESET": {
       return { ...state, loadingPay: false, successPay: false };
     }
+    case "DELIV_REQ":
+      return { ...state, loadingDeliver: true };
+    case "DELIV_SUCCESS": {
+      return { ...state, loadingDeliver: false, successDeliver: true };
+    }
+    case "DELIV_FAILURE": {
+      return { ...state, loadingDeliver: false };
+    }
+    case "DELIV_RESET": {
+      return { ...state, loadingDeliver: false, successDeliver: false };
+    }
 
     default:
       return state;
   }
 }
 export default function OrderPage() {
-  const [{ loading, error, order, loadingPay, successPay }, dispatch] =
-    useReducer(reducer, {
-      loading: false,
-      error: "",
-      order: {},
-      successPay: false,
-      loadingPay: false,
-    });
+  const [
+    {
+      loading,
+      error,
+      order,
+      loadingPay,
+      successPay,
+      loadingDeliver,
+      successDeliver,
+    },
+    dispatch,
+  ] = useReducer(reducer, {
+    loading: false,
+    error: "",
+    order: {},
+    successPay: false,
+    loadingPay: false,
+  });
 
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -101,10 +122,18 @@ export default function OrderPage() {
         dispatch({ type: "FETCH_FAIL", payload: getError(error) });
       }
     };
-    if (!order._id || successPay || (order._id && order._id !== orderId)) {
+    if (
+      !order._id ||
+      successPay ||
+      successDeliver ||
+      (order._id && order._id !== orderId)
+    ) {
       fetchOrder();
       if (successPay) {
         dispatch({ type: "PAY_RESET" });
+      }
+      if (successDeliver) {
+        dispatch({ type: "DELIV_RESET" });
       }
     } else {
       const loadPaypalScript = async () => {
@@ -125,7 +154,26 @@ export default function OrderPage() {
     }
   }, [navigate, userInfo, order, orderId, paypalDispatch, successPay]);
 
-  console.log(order);
+  async function deliverOrderHandler() {
+    try {
+      dispatch({ type: "DELIV_REQ" });
+
+      const { data } = await axios.put(
+        `/api/admin/orders/${order._id}/deliver`,
+        {}, // Empty object for the request body
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+
+      dispatch({ type: "DELIV_SUCCESS" });
+      toast.success("Order has been delivered");
+    } catch (error) {
+      dispatch({ type: "DELIV_FAIL", payload: getError(error) });
+      toast.error(getError(error));
+    }
+  }
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -137,7 +185,7 @@ export default function OrderPage() {
         <div>
           <section className="text-2xl font-bold my-6">
             Order #{order._id} <br />
-            Ordered On: {order.orderedOn.split("T").join("___")}
+            Ordered On: {order.createdAt.split("T").join("___")}
           </section>
 
           <section className="border my-4 px-4">
@@ -235,7 +283,17 @@ export default function OrderPage() {
                   {loadingPay && <LoadingBox></LoadingBox>}
                 </li>
               )}
-
+              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                <li>
+                  {loadingDeliver && <div>Just a sec...</div>}
+                  <button
+                    onClick={deliverOrderHandler}
+                    className=" ml-[25%] bg-yellow-400 active:bg-yellow-500 my-2 py-1 px-6 border-[1px] border-slate-500 rounded-md "
+                  >
+                    Confirm Delivery
+                  </button>
+                </li>
+              )}
               <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
             </ol>
           </section>

@@ -23,6 +23,7 @@ import { SearchPage } from "./pages/SearchPage";
 import { Footer } from "./components/Footer";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminOrderPage from "./pages/admin/AdminOrders";
 
 function App() {
   const [isAdminDropdownOpen, setAdminDropdownOpen] = useState(false);
@@ -129,19 +130,19 @@ function App() {
                   </Link>
                   <Link
                     className="block px-2 py-1 text-sm hover:text-blue-500"
-                    to="/productlist"
+                    to="/admin-productlist"
                   >
                     Products
                   </Link>
                   <Link
                     className="block px-2 py-1 text-sm hover:text-blue-500"
-                    to="/orderlist"
+                    to="/admin-orderlist"
                   >
                     Orders
                   </Link>
                   <Link
                     className="block px-2 py-1 text-sm hover:text-blue-500"
-                    to="/userlist"
+                    to="/admin-userlist"
                   >
                     Users
                   </Link>
@@ -210,6 +211,10 @@ function App() {
               <Route
                 path="/admin-dashboard"
                 element={<AdminDashboard />}
+              ></Route>
+              <Route
+                path="/admin-orderlist"
+                element={<AdminOrderPage />}
               ></Route>
               <Route
                 path="/profile"
