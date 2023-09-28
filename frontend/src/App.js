@@ -24,6 +24,7 @@ import { Footer } from "./components/Footer";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminOrderPage from "./pages/admin/AdminOrders";
+import AdminProducts from "./pages/admin/AdminProducts";
 
 function App() {
   const [isAdminDropdownOpen, setAdminDropdownOpen] = useState(false);
@@ -215,6 +216,10 @@ function App() {
               <Route
                 path="/admin-orderlist"
                 element={<AdminOrderPage />}
+              ></Route>
+              <Route
+                path="/admin-productlist"
+                element={<AdminProducts />}
               ></Route>
               <Route
                 path="/profile"

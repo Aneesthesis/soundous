@@ -152,7 +152,15 @@ export default function OrderPage() {
 
       loadPaypalScript();
     }
-  }, [navigate, userInfo, order, orderId, paypalDispatch, successPay]);
+  }, [
+    navigate,
+    userInfo,
+    order,
+    orderId,
+    paypalDispatch,
+    successPay,
+    successDeliver,
+  ]);
 
   async function deliverOrderHandler() {
     try {

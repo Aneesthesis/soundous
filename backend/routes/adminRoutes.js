@@ -91,7 +91,7 @@ adminRouter.put(
         .send({ message: "Sign in as an Admin to continue" });
     }
     try {
-      const order = await Order.findById(req.query.orderid);
+      const order = await Order.findById(req.params.orderid);
       if (order) {
         order.isDelivered = true;
         order.deliveredAt = Date.now();
@@ -105,6 +105,29 @@ adminRouter.put(
       }
     } catch (error) {
       return res.status(500).send({ message: "Internal Server Error" });
+    }
+  })
+);
+
+adminRouter.get(
+  "/products",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      return res
+        .status(401)
+        .send({ message: "Sign in as an Admin to continue" });
+    }
+
+    if (req.method === "GET") {
+      try {
+        const products = await Product.find({});
+        res.send(products);
+      } catch (error) {
+        return res.status(500).send({ message: "Internal Server Error" });
+      }
+    } else {
+      return res.status(400).send({ message: "Method not allowed" });
     }
   })
 );
