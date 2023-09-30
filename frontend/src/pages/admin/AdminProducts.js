@@ -110,14 +110,17 @@ function AdminProducts() {
                       <td className="p-5">{product.category}</td>
                       <td className="p-5">{product.countInStock}</td>
                       <td className="p-5">{product.rating}</td>
-                      <Link
-                        className="text-blue-500 underline"
-                        to={`/admin/products/${product._id}`}
-                      >
-                        Edit
-                      </Link>
-                      &nbsp;
-                      <button>Delete</button>
+                      <td className="p-5 flex gap-2">
+                        {" "}
+                        <Link
+                          className="text-blue-500 underline"
+                          to={`/admin/products/${product._id}`}
+                        >
+                          Edit
+                        </Link>
+                        &nbsp;
+                        <button>Delete</button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -131,3 +131,63 @@ adminRouter.get(
     }
   })
 );
+// GET a product by ID
+adminRouter.get(
+  "/products/:productId",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      return res
+        .status(401)
+        .send({ message: "Sign in as an Admin to continue" });
+    }
+
+    try {
+      console.log("anees");
+      const product = await Product.findById(req.params["productId"]);
+      if (!product) {
+        return res.status(404).send({ message: "Product not found" });
+      }
+      res.send(product);
+    } catch (error) {
+      return res.status(500).send({ message: "Internal Server Error" });
+    }
+  })
+);
+
+// Update a product by ID
+adminRouter.put(
+  "/products/:productId",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      return res
+        .status(401)
+        .send({ message: "Sign in as an Admin to continue" });
+    }
+
+    try {
+      const product = await Product.findById(req.params["productId"]);
+      if (!product) {
+        return res.status(404).send({ message: "Product not found" });
+      }
+
+      // Update product fields based on request data
+      product.name = req.body.name;
+      product.slug = req.body.slug;
+      product.price = req.body.price;
+      product.category = req.body.category;
+      product.image = req.body.image;
+      product.brand = req.body.brand;
+      product.countInStock = req.body.countInStock;
+      product.description = req.body.description;
+
+      // Save the updated product
+      await product.save();
+
+      res.send({ message: "Product updated!" });
+    } catch (error) {
+      return res.status(500).send({ message: "Internal Server Error" });
+    }
+  })
+);

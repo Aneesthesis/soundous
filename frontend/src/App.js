@@ -25,6 +25,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminOrderPage from "./pages/admin/AdminOrders";
 import AdminProducts from "./pages/admin/AdminProducts";
+import AdminProductEdit from "./pages/admin/AdminProductEdit";
 
 function App() {
   const [isAdminDropdownOpen, setAdminDropdownOpen] = useState(false);
@@ -220,6 +221,14 @@ function App() {
               <Route
                 path="/admin-productlist"
                 element={<AdminProducts />}
+              ></Route>
+              <Route
+                path="/admin/products/:id"
+                element={
+                  <ProtectedRoute>
+                    <AdminProductEdit />
+                  </ProtectedRoute>
+                }
               ></Route>
               <Route
                 path="/profile"
