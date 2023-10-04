@@ -1,5 +1,12 @@
 import { isAuth } from "../utils.js";
 import expressAsyncHandler from "express-async-handler";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: "dbenvvfuy",
+  api_key: "877411815619814",
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
 
 import express from "express";
 import { Order } from "../models/orderModel.js";
@@ -7,6 +14,20 @@ import { User } from "../models/userModel.js";
 import { Product } from "../models/productModel.js";
 
 export const adminRouter = express.Router();
+
+adminRouter.get("/cloudinary-sign", (req, res) => {
+  const timestamp = Math.round(new Date().getTime() / 1000);
+  const signature = cloudinary.utils.api_sign_request(
+    {
+      timestamp: timestamp,
+    },
+
+    process.env.CLOUDINARY_SECRET
+  );
+
+  res.statusCode = 200;
+  res.json({ signature, timestamp });
+});
 
 adminRouter.get(
   "/",
@@ -68,15 +89,30 @@ adminRouter.get(
         .send({ message: "Sign in as an Admin to continue" });
     }
 
-    if (req.method === "GET") {
-      try {
-        const orders = await Order.find({}).populate("user", "name");
-        res.send(orders);
-      } catch (error) {
-        return res.status(500).send({ message: "Internal Server Error" });
-      }
-    } else {
-      return res.status(400).send({ message: "Method not allowed" });
+    try {
+      const orders = await Order.find({}).populate("user", "name");
+      res.send(orders);
+    } catch (error) {
+      return res.status(500).send({ message: "Internal Server Error" });
+    }
+  })
+);
+
+adminRouter.get(
+  "/users",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      return res
+        .status(401)
+        .send({ message: "Sign in as an Admin to continue" });
+    }
+
+    try {
+      const users = await User.find({});
+      res.send(users);
+    } catch (error) {
+      return res.status(500).send({ message: "Internal Server Error" });
     }
   })
 );
@@ -119,15 +155,11 @@ adminRouter.get(
         .send({ message: "Sign in as an Admin to continue" });
     }
 
-    if (req.method === "GET") {
-      try {
-        const products = await Product.find({});
-        res.send(products);
-      } catch (error) {
-        return res.status(500).send({ message: "Internal Server Error" });
-      }
-    } else {
-      return res.status(400).send({ message: "Method not allowed" });
+    try {
+      const products = await Product.find({});
+      res.send(products);
+    } catch (error) {
+      return res.status(500).send({ message: "Internal Server Error" });
     }
   })
 );
@@ -143,7 +175,6 @@ adminRouter.get(
     }
 
     try {
-      console.log("anees");
       const product = await Product.findById(req.params["productId"]);
       if (!product) {
         return res.status(404).send({ message: "Product not found" });
@@ -186,6 +217,113 @@ adminRouter.put(
       await product.save();
 
       res.send({ message: "Product updated!" });
+    } catch (error) {
+      return res.status(500).send({ message: "Internal Server Error" });
+    }
+  })
+);
+
+adminRouter.post(
+  `/products`,
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      return res
+        .status(401)
+        .send({ message: "Sign in as an Admin to continue" });
+    }
+
+    const newProduct = new Product({
+      name: "new-product",
+      slug: "new-slug-" + Math.random(),
+      image: "/images/sample.jpg",
+      price: 999,
+      category: "Default",
+      brand: "Sample",
+      countInStock: 100,
+      description: "This a sample description",
+      rating: 0,
+      numReviews: 0,
+    });
+    const product = await newProduct.save();
+    res.send({ message: "Product created successfully", product });
+  })
+);
+
+// Update a product by ID
+adminRouter.put(
+  "/users/:userId/toggle-admin",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      return res
+        .status(401)
+        .send({ message: "Sign in as an Admin to continue" });
+    }
+
+    try {
+      const user = await User.findById(req.params["userId"]);
+      if (!user) {
+        return res.status(404).send({ message: "User not found" });
+      }
+
+      // Update user fields based on request data
+      user.isAdmin = !user.isAdmin;
+
+      // Save
+      await user.save();
+
+      res.send({ user, message: "User updated!" });
+    } catch (error) {
+      return res.status(500).send({ message: "Internal Server Error" });
+    }
+  })
+);
+
+// delete user by ID
+adminRouter.delete(
+  "/users/:userId/",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      return res
+        .status(401)
+        .send({ message: "Sign in as an Admin to continue" });
+    }
+
+    try {
+      const user = await User.findByIdAndDelete(req.params["userId"]);
+
+      if (!user) {
+        return res.status(404).send({ message: "User not found" });
+      }
+
+      res.send({ user, message: "User Deleted!" });
+    } catch (error) {
+      return res.status(500).send({ message: "Internal Server Error" });
+    }
+  })
+);
+
+// delete product by ID
+adminRouter.delete(
+  `/products/:product-id`,
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      return res
+        .status(401)
+        .send({ message: "Sign in as an Admin to continue" });
+    }
+    console.log("deleting...");
+    try {
+      const product = await Product.findByIdAndDelete(req.params["product-id"]);
+
+      if (!product) {
+        return res.status(404).send({ message: "Product not found" });
+      }
+
+      res.send(product);
     } catch (error) {
       return res.status(500).send({ message: "Internal Server Error" });
     }

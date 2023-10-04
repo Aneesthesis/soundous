@@ -26,6 +26,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminOrderPage from "./pages/admin/AdminOrders";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminProductEdit from "./pages/admin/AdminProductEdit";
+import AdminUsers from "./pages/admin/AdminUsers";
 
 function App() {
   const [isAdminDropdownOpen, setAdminDropdownOpen] = useState(false);
@@ -199,7 +200,7 @@ function App() {
         </div>
 
         <main>
-          <section className="main ">
+          <section className="main min-h-screen">
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/products/:slug" element={<ProductPage />}></Route>
@@ -222,6 +223,7 @@ function App() {
                 path="/admin-productlist"
                 element={<AdminProducts />}
               ></Route>
+              <Route path="/admin-userlist" element={<AdminUsers />}></Route>
               <Route
                 path="/admin/products/:id"
                 element={

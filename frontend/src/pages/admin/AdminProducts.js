@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../utils/getError";
 import { LoadingBox } from "../../components/UI/LoadingBox";
 import { MessageBox } from "../../components/UI/MessageBox";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 
 const reducer = (state, action) => {
@@ -15,19 +15,79 @@ const reducer = (state, action) => {
       return { ...state, loading: false, products: action.payload, error: "" };
     case "FETCH_FAILURE":
       return { ...state, loading: false, error: action.payload };
+    case "CREATE_REQ":
+      return { ...state, loadingCreate: true };
+    case "CREATE_SUCCESS":
+      return { ...state, loadingCreate: false };
+    case "CREATE_FAILURE":
+      return { ...state, loadingCreate: false };
+    case "DELETE_SUCCESS":
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product._id !== action.payload._id
+        ),
+      };
     default:
       return state;
   }
 };
 
 function AdminProducts() {
+  const navigate = useNavigate();
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const [{ loading, error, products }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: "",
-    products: [],
-  });
+  const [{ loading, error, products, loadingCreate, loadingDelete }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: "",
+      products: [],
+    });
+
+  const deleteHandler = async (product) => {
+    if (
+      !window.confirm(`You are about to delete ${product.name}. Are you sure?`)
+    ) {
+      return;
+    }
+    try {
+      const { data } = await axios.delete(
+        `/api/admin/products/${product._id}`,
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+
+      dispatch({ type: "DELETE_SUCCESS", payload: data });
+      toast.success("Product deleted");
+    } catch (error) {
+      toast.error(getError(error));
+    }
+  };
+
+  const createHandler = async () => {
+    if (!window.confirm("Are you sure?")) {
+      return;
+    }
+    dispatch({ type: "CREATE_REQ" });
+    try {
+      const { data } = await axios.post(
+        `/api/admin/products`,
+        {},
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+
+      dispatch({ type: "CREATE_SUCCESS" });
+      toast.success("Product created successfully");
+      console.log(data);
+      navigate(`/admin/products/${data.product["_id"]}`);
+    } catch (error) {
+      dispatch({ type: "CREATE_FAILURE" });
+      toast.error(getError(error));
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,13 +110,13 @@ function AdminProducts() {
   ) : (
     products && (
       <div className="dashboard flex">
-        <section className="left w-1/4 p-4">
+        <section className="hidden md:block left w-1/4 p-4">
           <div className="menu-card bg-white rounded-lg p-4">
             <h3 className="text-xl font-semibold mb-4">Dashboard Menu</h3>
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/admin/orders"
+                  to="/admin-orderlist"
                   className="text-blue-500 hover:underline"
                 >
                   Orders
@@ -64,7 +124,7 @@ function AdminProducts() {
               </li>
               <li>
                 <Link
-                  to="/admin/products"
+                  to="/admin-productlist"
                   className="text-blue-500 hover:underline"
                 >
                   Products
@@ -72,7 +132,7 @@ function AdminProducts() {
               </li>
               <li>
                 <Link
-                  to="/admin/users"
+                  to="/admin-userlist"
                   className="text-blue-500 hover:underline"
                 >
                   Users
@@ -82,7 +142,18 @@ function AdminProducts() {
           </div>
         </section>
         <section className="overflow-x-auto w-3/4 p-4">
-          <h1 className="mb-4 text-xl">Admin Products</h1>
+          <div className="flex justify-between">
+            <h1 className="mb-4 text-xl">Admin Products</h1>
+            {loadingDelete && <div>Deleting Product</div>}
+            <button
+              disabled={loadingCreate}
+              onClick={createHandler}
+              className="primary-button"
+            >
+              {loadingCreate ? "Loading" : "Create"}
+            </button>
+          </div>
+
           {loading ? (
             <div>loading products...</div>
           ) : error ? (
@@ -119,7 +190,9 @@ function AdminProducts() {
                           Edit
                         </Link>
                         &nbsp;
-                        <button>Delete</button>
+                        <button onClick={() => deleteHandler(product)}>
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}

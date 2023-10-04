@@ -86,7 +86,7 @@ function AdminDashboard() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/admin/orders"
+                  to="/admin-orderlist"
                   className="text-blue-500 hover:underline"
                 >
                   Orders
@@ -94,7 +94,7 @@ function AdminDashboard() {
               </li>
               <li>
                 <Link
-                  to="/admin/products"
+                  to="/admin-productlist"
                   className="text-blue-500 hover:underline"
                 >
                   Products
@@ -102,7 +102,7 @@ function AdminDashboard() {
               </li>
               <li>
                 <Link
-                  to="/admin/users"
+                  to="/admin-userlist"
                   className="text-blue-500 hover:underline"
                 >
                   Users

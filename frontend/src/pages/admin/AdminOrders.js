@@ -50,13 +50,13 @@ export default function AdminOrderPage() {
   ) : (
     orders && (
       <div className="dashboard flex">
-        <section className="left w-1/4 p-4">
+        <section className=" hidden md:block left w-1/4 p-4">
           <div className="menu-card bg-white rounded-lg p-4">
             <h3 className="text-xl font-semibold mb-4">Dashboard Menu</h3>
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/admin/orders"
+                  to="/admin-orderlist"
                   className="text-blue-500 hover:underline"
                 >
                   Orders
@@ -64,7 +64,7 @@ export default function AdminOrderPage() {
               </li>
               <li>
                 <Link
-                  to="/admin/products"
+                  to="/admin-productlist"
                   className="text-blue-500 hover:underline"
                 >
                   Products
@@ -72,7 +72,7 @@ export default function AdminOrderPage() {
               </li>
               <li>
                 <Link
-                  to="/admin/users"
+                  to="/admin-userlist"
                   className="text-blue-500 hover:underline"
                 >
                   Users
@@ -81,7 +81,7 @@ export default function AdminOrderPage() {
             </ul>
           </div>
         </section>
-        <section className="overflow-x-auto w-3/4 p-4">
+        <section className="overflow-x-auto w-full md:w-3/4 p-4">
           <h1 className="mb-4 text-xl">Admin Orders</h1>
           {loading ? (
             <div>loading orders...</div>
