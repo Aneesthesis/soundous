@@ -35,7 +35,7 @@ export const PaymentMethodPage = () => {
         <Helmet>
           <title>Payment Method</title>
         </Helmet>
-        <h1 className="text-3xl mb-4">Select a Payment Method</h1>
+        <h1 className=" text-xl md:text-3xl mb-4">Select a Payment Method</h1>
         <form
           className="flex flex-col gap-y-4"
           onSubmit={confirmPaymentHandler}
@@ -49,18 +49,18 @@ export const PaymentMethodPage = () => {
               onChange={(e) => setPaymentMethod(e.target.value)}
               className="text-amber-500"
             />
-            <span className="text-lg font-semibold">PayPal</span>
+            <span className="text-base font-semibold">PayPal</span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
-              id="stripe"
-              value="Stripe"
-              checked={paymentMethodName === "Stripe"}
+              id="cod"
+              value="Cash on Delivery"
+              checked={paymentMethodName === "Cash on Delivery"}
               onChange={(e) => setPaymentMethod(e.target.value)}
               className="text-amber-500"
             />
-            <span className="text-lg font-semibold">Stripe</span>
+            <span className="text-base font-semibold">Cash on Delivery</span>
           </label>
           <button
             className="w-fit mx-auto bg-yellow-500 border-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"

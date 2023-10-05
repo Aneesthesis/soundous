@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import { Cart } from "./components/UI/Cart";
@@ -71,7 +71,7 @@ function App() {
           className="fixed top-0 left-[37%] transform -translate-x-1/2 z-50 w-full max-w-screen-md px-4"
           limit={1}
         />
-        <nav className="flex py-3 px-4 md:py-4 md:px-8 lg:py-4 lg:px-10 bg-stone-600 justify-between items-center h-16">
+        <nav className="flex py-3 px-4 md:py-4 md:px-8 lg:py-4 lg:px-10 bg-gray-800 text-white justify-between items-center h-16">
           <button className="w-10">
             <i
               className="w-full fas fa-bars text-amber-400 mr-4"
@@ -97,12 +97,17 @@ function App() {
         </nav>
 
         <div
-          className={`top-[65px] max-h-screen ${
+          className={`top-[65px] ${
             sidebarIsOpen ? "left-0" : "-left-[300px] "
-          } w-[300px] h-full border-r border-gray-200 bg-white text-gray-700 absolute top-0 transition-all duration-500 ease-in-out`}
+          } w-[200px] h-full border-r border-gray-200 bg-white text-gray-700 absolute top-0 transition-all duration-500 ease-in-out`}
         >
           <div className="p-4">
-            <h1 className="text-2xl mb-4 block md:hidden">Soundous</h1>
+            <h1 className="text-2xl mb-4 block md:hidden">
+              <Link to={"/"} className="text-amber-400 font-bold">
+                Soundous
+              </Link>
+            </h1>
+
             {userInfo ? (
               <div className="mb-4">
                 <h2 className="text-xl font-semibold">Hi, {userInfo.name}</h2>
@@ -259,9 +264,8 @@ function App() {
             </Routes>
           </section>
         </main>
-        <footer>
-          <Footer />
-        </footer>
+
+        <Footer />
       </div>
     </BrowserRouter>
   );

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Rating } from "./Rating";
 import { Store } from "../Store";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const ProductDetails = ({ product }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -21,6 +22,7 @@ export const ProductDetails = ({ product }) => {
       payload: { ...product, quantity },
     });
   };
+
   return (
     <div className="container mx-auto px-4">
       <div className="product-detail mx-auto my-5 flex flex-col md:flex-row gap-x-10">
@@ -42,24 +44,40 @@ export const ProductDetails = ({ product }) => {
           </div>
           <div className="text-gray-700 text-lg">
             Status:{" "}
-            {product.countInStock > 0 ? (
-              <span className="bg-green-500 px-2 py-1 text-white rounded-md">
-                Available
-              </span>
-            ) : (
-              <span className="bg-gray-500 px-2 py-1 text-white rounded-md">
-                Out of Stock
-              </span>
+            <span
+              className={
+                product.countInStock > 0
+                  ? "bg-green-500 px-2 py-1 text-white rounded-md"
+                  : "bg-gray-500 px-2 py-1 text-white rounded-md"
+              }
+            >
+              {product.countInStock > 0 ? "Available" : "Out of Stock"}
+            </span>
+          </div>
+          <div className="flex flex-col mt-4">
+            {product.countInStock > 0 && (
+              <button
+                onClick={addToCartHandler}
+                className="w-full md:w-56 px-2 py-1 bg-yellow-500 font-semibold cursor-pointer rounded-md text-white hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300"
+              >
+                Add to Cart
+              </button>
+            )}
+            <button
+              className="w-full md:w-56 text-center mt-2 px-2 py-1 bg-yellow-500 font-semibold cursor-pointer rounded-md text-white hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300"
+              to={"/"}
+            >
+              Back
+            </button>
+            {state.cart.cartItems.length > 0 && (
+              <button
+                to={"/cart"}
+                className="w-full md:w-56 mt-2 text-center px-2 py-1 bg-yellow-500 font-semibold cursor-pointer rounded-md text-white hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300"
+              >
+                Go to Cart
+              </button>
             )}
           </div>
-          {product.countInStock > 0 && (
-            <button
-              onClick={addToCartHandler}
-              className="w-auto px-4 py-2 bg-yellow-500 font-semibold my-4 cursor-pointer rounded-md text-white hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300"
-            >
-              Add to Cart
-            </button>
-          )}
         </div>
       </div>
     </div>

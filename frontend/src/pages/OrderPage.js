@@ -254,7 +254,9 @@ export default function OrderPage() {
 
         <div>
           <section className="border mt-6 md:mt-28 px-8">
-            <h2 className="text-xl font-semibold my-2">Order Summary</h2>
+            <h2 className="text-xl text-center font-semibold my-2">
+              Order Summary
+            </h2>
             <ol>
               <li className="mx-6 flex justify-between">
                 <span>Items</span>
@@ -275,7 +277,7 @@ export default function OrderPage() {
                 <span>Order Total</span>
                 <span className="mr-8">${order.finalAmount}</span>
               </li>
-              {!order.isPaid && (
+              {!order.isPaid && order.paymentMethod === "PayPal" && (
                 <li>
                   {isPending ? (
                     <LoadingBox />
@@ -291,16 +293,35 @@ export default function OrderPage() {
                   {loadingPay && <LoadingBox></LoadingBox>}
                 </li>
               )}
-              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+              {!order.isPaid && order.paymentMethod === "Cash on Delivery" && (
+                <div className="font-semibold my-5 ml-5">
+                  Please pay ${order.finalAmount} on delivery
+                </div>
+              )}
+              {(userInfo.isAdmin && order.isPaid && !order.isDelivered) ||
+              (userInfo.isAdmin &&
+                !order.isPaid &&
+                !order.isDelivered &&
+                order.paymentMethod === "Cash on Delivery") ? (
                 <li>
                   {loadingDeliver && <div>Just a sec...</div>}
                   <button
                     onClick={deliverOrderHandler}
-                    className=" ml-[25%] bg-yellow-400 active:bg-yellow-500 my-2 py-1 px-6 border-[1px] border-slate-500 rounded-md "
+                    className="w-full bg-yellow-400 active:bg-yellow-500 my-2 py-1 px-6 border-[1px] border-slate-500 rounded-md "
                   >
-                    Confirm Delivery
+                    {order.paymentMethod === "Cash on Delivery"
+                      ? "Confirm Payment and Delivery"
+                      : "Confirm Delivery "}
                   </button>
                 </li>
+              ) : order.isDelivered ? (
+                <div className="font-semibold bg-green-100 text-center my-5">
+                  Order has been delivered
+                </div>
+              ) : (
+                <div className="font-semibold bg-red-100 text-center my-5">
+                  Delivery Pending
+                </div>
               )}
               <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
             </ol>

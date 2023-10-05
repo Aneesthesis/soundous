@@ -108,12 +108,12 @@ function AdminProductEdit() {
       } = await axios(`/api/admin/cloudinary-sign`);
 
       const file = e.target.files[0];
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("signature", signature);
-      formData.append("api_key", 877411815619814);
-      formData.append("timestamp", timestamp);
-      const { data } = await axios.post(url, formData);
+      const imageFormData = new FormData();
+      imageFormData.append("file", file);
+      imageFormData.append("signature", signature);
+      imageFormData.append("api_key", 877411815619814);
+      imageFormData.append("timestamp", timestamp);
+      const { data } = await axios.post(url, imageFormData);
 
       dispatch({ type: "UPLOAD_SUCCESS" });
       setFormData({ ...formData, image: data.secure_url });

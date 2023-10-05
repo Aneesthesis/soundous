@@ -131,6 +131,11 @@ adminRouter.put(
       if (order) {
         order.isDelivered = true;
         order.deliveredAt = Date.now();
+        if (order.paymentMethod === "Cash on Delivery") {
+          order.isPaid = true;
+          order.paidAt = Date.now();
+        }
+
         const deliveredOrder = await order.save();
         res.send({
           order: deliveredOrder,
@@ -199,6 +204,7 @@ adminRouter.put(
 
     try {
       const product = await Product.findById(req.params["productId"]);
+      console.log(product);
       if (!product) {
         return res.status(404).send({ message: "Product not found" });
       }
@@ -208,14 +214,17 @@ adminRouter.put(
       product.slug = req.body.slug;
       product.price = req.body.price;
       product.category = req.body.category;
+      console.log(product);
       product.image = req.body.image;
+      console.log(product);
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
+      console.log(product);
 
       // Save the updated product
       await product.save();
-
+      console.log(product);
       res.send({ message: "Product updated!" });
     } catch (error) {
       return res.status(500).send({ message: "Internal Server Error" });
@@ -307,7 +316,7 @@ adminRouter.delete(
 
 // delete product by ID
 adminRouter.delete(
-  `/products/:product-id`,
+  `/products/:productId`,
   isAuth,
   expressAsyncHandler(async (req, res) => {
     if (!req.user || !req.user.isAdmin) {
@@ -315,9 +324,10 @@ adminRouter.delete(
         .status(401)
         .send({ message: "Sign in as an Admin to continue" });
     }
-    console.log("deleting...");
+
     try {
-      const product = await Product.findByIdAndDelete(req.params["product-id"]);
+      console.log(req.params["productId"]);
+      const product = await Product.findByIdAndDelete(req.params["productId"]);
 
       if (!product) {
         return res.status(404).send({ message: "Product not found" });
