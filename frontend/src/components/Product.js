@@ -1,33 +1,38 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Button from "./UI/Button";
 import { Rating } from "./Rating";
 
 export default function Product({ products }) {
   return (
-    <div className="flex flex-wrap md:flex-nowrap gap-2 content-center justify-center text-center p-4">
+    <div className="flex flex-wrap justify-center gap-10 md:gap-x-4 px-2 md:px-0 md:my-14 ">
       {products.map((prod) => (
-        <div key={prod.slug}>
+        <div
+          className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
+          key={prod.slug}
+        >
           <Link to={`/products/${prod.slug}`}>
             <img
-              className="w-full w-max-[400px]"
               src={prod.image}
               alt={prod.name}
+              className="w-full max-h-full  md:max-h-[310px] object-cover"
             />
           </Link>
-          <div className="prod-info flex-col gap-y-2 mt-4">
-            <Link to={`/products/${prod.slug}`}>
-              <p>{prod.name}</p>
+          <div className="prod-info mt-4 text-center">
+            <Link
+              to={`/products/${prod.slug}`}
+              className="text-lg font-semibold"
+            >
+              {prod.name}
             </Link>
             <Rating rating={prod.rating} numReviews={prod.numReviews} />
-            <p>
+            <p className="text-xl font-semibold">
               <strong>${prod.price}</strong>
             </p>
+            <Button>
+              <Link to={`/products/${prod.slug}`}>View Details</Link>
+            </Button>
           </div>
-          <Button>
-            {" "}
-            <Link to={`/products/${prod.slug}`}>View Details</Link>
-          </Button>
         </div>
       ))}
     </div>

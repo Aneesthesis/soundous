@@ -124,7 +124,7 @@ function AdminProductEdit() {
     }
   };
 
-  // Handle form submission (you can replace this with your own logic)
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const {
@@ -163,6 +163,17 @@ function AdminProductEdit() {
     // Access the form data in 'formData' state
     console.log("Form Data:", formData);
   };
+
+  // async function createCancelHandler() {
+  //   try {
+  //     await axios.delete(`/api/admin/products/cancelcreate`, {
+  //       headers: { authorization: `Bearer ${userInfo.token}` },
+  //     });
+  //     toast.error("Product creation failed");
+  //   } catch (error) {
+  //     toast.error(getError(error));
+  //   }
+  // }
 
   return (
     <div className="dashboard flex">

@@ -214,17 +214,14 @@ adminRouter.put(
       product.slug = req.body.slug;
       product.price = req.body.price;
       product.category = req.body.category;
-      console.log(product);
       product.image = req.body.image;
-      console.log(product);
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
-      console.log(product);
 
       // Save the updated product
       await product.save();
-      console.log(product);
+
       res.send({ message: "Product updated!" });
     } catch (error) {
       return res.status(500).send({ message: "Internal Server Error" });
@@ -336,6 +333,35 @@ adminRouter.delete(
       res.send(product);
     } catch (error) {
       return res.status(500).send({ message: "Internal Server Error" });
+    }
+  })
+);
+
+adminRouter.delete(
+  `/products/cancelcreate`,
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      return res
+        .status(401)
+        .send({ message: "Sign in as an Admin to continue" });
+    }
+    try {
+      const product = await Product.deleteOne({
+        name: "new-product",
+        // image: "/images/sample.jpg",
+        // category: "Default",
+        // brand: "Sample",
+        // description: "This a sample description",
+      });
+
+      if (!product.deletedCount) {
+        return res.status(404).send({ message: "Product not found" });
+      }
+
+      res.send({ message: "Product creation cancelled" });
+    } catch (error) {
+      res.status(500).send({ message: "Internal Server Error" });
     }
   })
 );

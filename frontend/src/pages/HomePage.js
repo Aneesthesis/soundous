@@ -46,7 +46,6 @@ export default function HomePage() {
       <Helmet>
         <title>Soundous</title>
       </Helmet>
-      <h1 className="font-bold text-3xl p-5">Featured Fashion</h1>
       {loading ? (
         <LoadingBox />
       ) : error ? (

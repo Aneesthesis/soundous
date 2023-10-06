@@ -26,7 +26,7 @@ export const ProductDetails = ({ product }) => {
   return (
     <div className="container mx-auto px-4">
       <div className="product-detail mx-auto my-5 flex flex-col md:flex-row gap-x-10">
-        <div className="image sm:w-60 lg:w-1/3">
+        <div className="image sm:w-60 lg:w-1/2">
           <img
             src={product.image}
             alt={product.name}
