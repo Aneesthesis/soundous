@@ -33,17 +33,20 @@ export const ProductDetails = ({ product }) => {
             className="w-full h-auto"
           />
         </div>
-        <div className="product-info flex flex-col w-full">
+        <div className="product-info flex gap-y-2 flex-col w-full">
           <div className="font-semibold text-3xl mb-2 text-gray-800">
             {product.name}
           </div>
           <Rating rating={product.rating} numReviews={product.numReviews} />
-          <div className="text-gray-700 text-lg">Price: ${product.price}</div>
           <div className="text-gray-700 text-lg">
-            Description: {product.description}
+            <span className="font-medium">Price:</span> ${product.price}
           </div>
           <div className="text-gray-700 text-lg">
-            Status:{" "}
+            <span className="font-medium"> Description:</span>{" "}
+            {product.description}
+          </div>
+          <div className="text-gray-700 text-lg py-4">
+            <span className="font-medium">Status: </span>
             <span
               className={
                 product.countInStock > 0

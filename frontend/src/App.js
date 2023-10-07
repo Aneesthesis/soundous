@@ -27,6 +27,7 @@ import AdminOrderPage from "./pages/admin/AdminOrders";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminProductEdit from "./pages/admin/AdminProductEdit";
 import AdminUsers from "./pages/admin/AdminUsers";
+import CreateProductForm from "./pages/admin/AdminCreateProduct";
 
 function App() {
   const [isAdminDropdownOpen, setAdminDropdownOpen] = useState(false);
@@ -71,7 +72,7 @@ function App() {
           className="fixed top-0 left-[37%] transform -translate-x-1/2 z-50 w-full max-w-screen-md px-4"
           limit={1}
         />
-        <nav className="flex py-3 px-4 md:py-4 md:px-8 lg:py-4 lg:px-10 bg-gray-800 text-white justify-between items-center h-16">
+        <nav className="navbar flex py-3 px-4 md:py-4 md:px-8 lg:py-4 lg:px-10 bg-gray-800 text-white justify-between items-center h-16">
           <button className="w-10">
             <i
               className="w-full fas fa-bars text-amber-400 mr-4"
@@ -79,7 +80,7 @@ function App() {
             ></i>
           </button>
           <Link
-            className="hidden md:block -ml-80 text-amber-400 text-2xl"
+            className="hidden lg:block -ml-80 text-amber-400 text-2xl"
             to="/"
           >
             Soundous
@@ -97,12 +98,12 @@ function App() {
         </nav>
 
         <div
-          className={`top-[65px] ${
+          className={`z-50 top-[65px] ${
             sidebarIsOpen ? "left-0" : "-left-[300px] "
           } w-[200px] h-full border-r border-gray-200 bg-white text-gray-700 absolute top-0 transition-all duration-500 ease-in-out`}
         >
           <div className="p-4">
-            <h1 className="text-2xl mb-4 block md:hidden">
+            <h1 className="text-2xl mb-4 block lg:hidden">
               <Link to={"/"} className="text-amber-400 font-bold">
                 Soundous
               </Link>
@@ -204,7 +205,7 @@ function App() {
           </div>
         </div>
 
-        <main>
+        <main className="pt-16">
           <section className="main min-h-screen">
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
@@ -218,17 +219,36 @@ function App() {
               <Route path="/search" element={<SearchPage />}></Route>
               <Route
                 path="/admin-dashboard"
-                element={<AdminDashboard />}
+                element={
+                  <ProtectedRoute>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
               ></Route>
               <Route
                 path="/admin-orderlist"
-                element={<AdminOrderPage />}
+                element={
+                  <ProtectedRoute>
+                    <AdminOrderPage />
+                  </ProtectedRoute>
+                }
               ></Route>
               <Route
                 path="/admin-productlist"
-                element={<AdminProducts />}
+                element={
+                  <ProtectedRoute>
+                    <AdminProducts />
+                  </ProtectedRoute>
+                }
               ></Route>
-              <Route path="/admin-userlist" element={<AdminUsers />}></Route>
+              <Route
+                path="/admin-userlist"
+                element={
+                  <ProtectedRoute>
+                    <AdminUsers />
+                  </ProtectedRoute>
+                }
+              ></Route>
               <Route
                 path="/admin/products/:id"
                 element={
@@ -258,6 +278,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <OrderHistoryPage />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin-create-product"
+                element={
+                  <ProtectedRoute>
+                    <CreateProductForm />
                   </ProtectedRoute>
                 }
               ></Route>

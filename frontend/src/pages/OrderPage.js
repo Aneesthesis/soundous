@@ -244,8 +244,10 @@ export default function OrderPage() {
                   >
                     {item.name}
                   </Link>
-                  <div>{item.quantity}</div>
-                  <div>${item.price * item.quantity}</div>
+                  <div className="relative right-15">×{item.quantity}</div>
+                  <div className="relative right-10">
+                    ${item.price * item.quantity}
+                  </div>
                 </li>
               ))}
             </div>

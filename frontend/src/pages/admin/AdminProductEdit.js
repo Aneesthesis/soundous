@@ -66,7 +66,6 @@ function AdminProductEdit() {
 
   const [formData, setFormData] = useState({
     name: data.name || "",
-    slug: data.slug || "",
     price: data.price || "",
     image: data.image || "",
     featuredImage: data.featuredImage || "",
@@ -127,23 +126,14 @@ function AdminProductEdit() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const {
-      name,
-      slug,
-      price,
-      image,
-      category,
-      brand,
-      countInStock,
-      description,
-    } = formData;
+    const { name, price, image, category, brand, countInStock, description } =
+      formData;
     try {
       dispatch({ type: "UPDATE_REQ" });
       await axios.put(
         `/api/admin/products/${productId}`,
         {
           name,
-          slug,
           price,
           image,
           category,
@@ -234,22 +224,6 @@ function AdminProductEdit() {
             />
             {error.name && (
               <div className="text-red-500">{error.name.message}</div>
-            )}
-          </div>
-          <div className="mb-4">
-            <label htmlFor="slug" className="block text-sm font-medium">
-              Slug
-            </label>
-            <input
-              type="text"
-              className="w-full px-3 py-2 border rounded-md outline-none"
-              id="slug"
-              value={formData.slug}
-              required
-              onChange={handleChange}
-            />
-            {error.slug && (
-              <div className="text-red-500">{error.slug.message}</div>
             )}
           </div>
 

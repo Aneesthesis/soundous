@@ -65,28 +65,8 @@ function AdminProducts() {
     }
   };
 
-  const createHandler = async () => {
-    if (!window.confirm("Are you sure?")) {
-      return;
-    }
-    dispatch({ type: "CREATE_REQ" });
-    try {
-      const { data } = await axios.post(
-        `/api/admin/products`,
-        {},
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-
-      dispatch({ type: "CREATE_SUCCESS" });
-      toast.success("Product created successfully");
-      console.log(data);
-      navigate(`/admin/products/${data.product["_id"]}`);
-    } catch (error) {
-      dispatch({ type: "CREATE_FAILURE" });
-      toast.error(getError(error));
-    }
+  const createHandler = () => {
+    navigate("/admin-create-product");
   };
 
   useEffect(() => {
@@ -141,14 +121,15 @@ function AdminProducts() {
             </ul>
           </div>
         </section>
-        <section className="overflow-x-auto w-3/4 p-4">
-          <div className="flex justify-between">
-            <h1 className="mb-4 text-xl">Admin Products</h1>
+
+        <section className="overflow-x-auto w-full md:w-3/4 p-4">
+          <div className="flex flex-col justify-between sticky top-1">
+            <h1 className="mb-4 text-2xl">Admin Products</h1>
             {loadingDelete && <div>Deleting Product</div>}
             <button
               disabled={loadingCreate}
               onClick={createHandler}
-              className="primary-button"
+              className="bg-yellow-400 text-white rounded-md py-2 px-5 mb-4 text-lg hover:bg-yellow-500"
             >
               {loadingCreate ? "Loading" : "Create"}
             </button>
@@ -176,10 +157,15 @@ function AdminProducts() {
                   {products.map((product) => (
                     <tr key={product._id} className="border-b">
                       <td className="p-5">{product._id}</td>
-                      <td className="p-5">{product.name}</td>
-                      <td className="p-5">{product.price}</td>
+
+                      <td className="p-5 hover:text-blue-400">
+                        <Link to={`/products/${product.slug}`}>
+                          {product.name}
+                        </Link>
+                      </td>
+                      <td className="p-5">${product.price}</td>
                       <td className="p-5">{product.category}</td>
-                      <td className="p-5">{product.countInStock}</td>
+                      <td className="p-5 ">{product.countInStock}</td>
                       <td className="p-5">{product.rating}</td>
                       <td className="p-5 flex gap-2">
                         {" "}

@@ -98,6 +98,8 @@ adminRouter.get(
   })
 );
 
+// Get all Users
+
 adminRouter.get(
   "/users",
   isAuth,
@@ -117,6 +119,7 @@ adminRouter.get(
   })
 );
 
+// confirm delivery
 adminRouter.put(
   "/orders/:orderid/deliver",
   isAuth,
@@ -150,6 +153,7 @@ adminRouter.put(
   })
 );
 
+// Fetch all products
 adminRouter.get(
   "/products",
   isAuth,
@@ -211,8 +215,8 @@ adminRouter.put(
 
       // Update product fields based on request data
       product.name = req.body.name;
-      product.slug = req.body.slug;
-      product.price = req.body.price;
+      (product.slug = req.body.name.toLowerCase().split(" ").join("-")),
+        (product.price = req.body.price);
       product.category = req.body.category;
       product.image = req.body.image;
       product.brand = req.body.brand;
@@ -240,16 +244,16 @@ adminRouter.post(
     }
 
     const newProduct = new Product({
-      name: "new-product",
-      slug: "new-slug-" + Math.random(),
-      image: "/images/sample.jpg",
-      price: 999,
-      category: "Default",
-      brand: "Sample",
-      countInStock: 100,
-      description: "This a sample description",
-      rating: 0,
-      numReviews: 0,
+      name: req.body.name,
+      slug: req.body.name.toLowerCase().split(" ").join("-"),
+      price: req.body.price,
+      category: req.body.category,
+      image: req.body.image,
+      brand: req.body.brand,
+      countInStock: req.body.countInStock,
+      description: req.body.description,
+      rating: req.body.rating || 0,
+      numReviews: req.body.numReviews || 0,
     });
     const product = await newProduct.save();
     res.send({ message: "Product created successfully", product });
@@ -276,7 +280,6 @@ adminRouter.put(
       // Update user fields based on request data
       user.isAdmin = !user.isAdmin;
 
-      // Save
       await user.save();
 
       res.send({ user, message: "User updated!" });
@@ -333,35 +336,6 @@ adminRouter.delete(
       res.send(product);
     } catch (error) {
       return res.status(500).send({ message: "Internal Server Error" });
-    }
-  })
-);
-
-adminRouter.delete(
-  `/products/cancelcreate`,
-  isAuth,
-  expressAsyncHandler(async (req, res) => {
-    if (!req.user || !req.user.isAdmin) {
-      return res
-        .status(401)
-        .send({ message: "Sign in as an Admin to continue" });
-    }
-    try {
-      const product = await Product.deleteOne({
-        name: "new-product",
-        // image: "/images/sample.jpg",
-        // category: "Default",
-        // brand: "Sample",
-        // description: "This a sample description",
-      });
-
-      if (!product.deletedCount) {
-        return res.status(404).send({ message: "Product not found" });
-      }
-
-      res.send({ message: "Product creation cancelled" });
-    } catch (error) {
-      res.status(500).send({ message: "Internal Server Error" });
     }
   })
 );

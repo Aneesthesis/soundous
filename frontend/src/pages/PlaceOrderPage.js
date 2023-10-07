@@ -40,7 +40,7 @@ export const PlaceOrderPage = () => {
     0
   );
   state.cart.shippingPrice = state.cart.cartItems.price > 2000 ? 100 : 0;
-  state.cart.taxes = state.cart.itemsPrice * 0.12;
+  state.cart.taxes = Math.ceil(state.cart.itemsPrice * 0.12);
   state.cart.finalAmount = Math.round(
     state.cart.itemsPrice + state.cart.shippingPrice + state.cart.taxes,
     2
@@ -129,8 +129,10 @@ export const PlaceOrderPage = () => {
               >
                 {item.name}
               </Link>
-              <div>{item.quantity}</div>
-              <div>${item.price * item.quantity}</div>
+              <div className="relative right-15">×{item.quantity}</div>
+              <div className="relative right-10">
+                ${item.price * item.quantity}
+              </div>
             </li>
           ))}
           <br />
