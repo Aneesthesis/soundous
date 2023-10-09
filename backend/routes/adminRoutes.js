@@ -290,7 +290,32 @@ adminRouter.put(
 );
 
 // delete user by ID
-adminRouter.delete(
+// adminRouter.delete(
+//   "/users/:userId/",
+//   isAuth,
+//   expressAsyncHandler(async (req, res) => {
+//     if (!req.user || !req.user.isAdmin) {
+//       return res
+//         .status(401)
+//         .send({ message: "Sign in as an Admin to continue" });
+//     }
+
+//     try {
+//       const user = await User.findByIdAndDelete(req.params["userId"]);
+
+//       if (!user) {
+//         return res.status(404).send({ message: "User not found" });
+//       }
+
+//       res.send({ user, message: "User Deleted!" });
+//     } catch (error) {
+//       return res.status(500).send({ message: "Internal Server Error" });
+//     }
+//   })
+// );
+
+// update User active status
+adminRouter.patch(
   "/users/:userId/",
   isAuth,
   expressAsyncHandler(async (req, res) => {
@@ -299,17 +324,23 @@ adminRouter.delete(
         .status(401)
         .send({ message: "Sign in as an Admin to continue" });
     }
+    const userId = req.params.userId;
 
     try {
-      const user = await User.findByIdAndDelete(req.params["userId"]);
+      const user = await User.findById(userId);
 
       if (!user) {
         return res.status(404).send({ message: "User not found" });
       }
 
-      res.send({ user, message: "User Deleted!" });
+      // Toggle the isDeactivated field
+      user.isDeactivated = !user.isDeactivated;
+      const updatedUser = await user.save();
+
+      res.status(200).send({ user: updatedUser, message: "User Updated!" });
     } catch (error) {
-      return res.status(500).send({ message: "Internal Server Error" });
+      console.error(error);
+      res.status(500).send({ message: "Internal Server Error" });
     }
   })
 );

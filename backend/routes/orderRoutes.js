@@ -18,10 +18,6 @@ orderRouter.post(
       taxes: req.body.taxes,
       finalAmount: req.body.finalAmount,
       user: req.user._id,
-      // isPaid: { type: Boolean, default: false },
-      // paidAt: { type: Date },
-      // isDelivered: { type: Boolean, default: false },
-      // deliveredAt: { type: Date },
     });
 
     const order = await newOrder.save();

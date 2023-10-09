@@ -86,15 +86,15 @@ export const PlaceOrderPage = () => {
   };
 
   return (
-    <div className="mx-4 mb-4 flex flex-col md:flex-row justify-evenly">
+    <div className="mx-4 my-4 mb-4 flex flex-col md:flex-row justify-evenly">
       <div className="flex flex-col gap-y-5">
         <CheckoutProgress step1 step2 step3 step4></CheckoutProgress>
         <Helmet>
           <title>Order Preview</title>
         </Helmet>
-        <h1 className="text-3xl mb-4">Order Preview</h1>
+        <h1 className="text-xl md:text-2xl mb-4">Order Preview</h1>
         <section className=" border max-w-2xl">
-          <h2 className="text-xl font-semibold my-2">Shipping</h2>
+          <h2 className="text-base font-semibold my-2">Shipping Info</h2>
           <span className="font-bold">Name: </span> <span>{fullName}</span>{" "}
           <br />
           <span className="font-bold">Address: </span>
@@ -108,7 +108,7 @@ export const PlaceOrderPage = () => {
           </Link>
         </section>
         <section className=" border max-w-2xl">
-          <h2 className="text-xl font-semibold my-2">Payment</h2>
+          <h2 className="text-base font-semibold my-2">Payment Info</h2>
           <span className="font-bold">Method: </span>{" "}
           <span>{paymentMethod}</span> <br />
           <Link
@@ -119,7 +119,7 @@ export const PlaceOrderPage = () => {
           </Link>
         </section>
         <section className=" border max-w-2xl">
-          <h2 className="text-xl font-semibold my-2">Items</h2>
+          <h2 className="text-base font-semibold my-2">Items</h2>
           {state.cart.cartItems.map((item) => (
             <li className="flex items-center justify-between  border border-b-2">
               <img className="w-[60px]" src={item.image} />
@@ -129,10 +129,8 @@ export const PlaceOrderPage = () => {
               >
                 {item.name}
               </Link>
-              <div className="relative right-15">×{item.quantity}</div>
-              <div className="relative right-10">
-                ${item.price * item.quantity}
-              </div>
+              <div>×{item.quantity}</div>
+              <div>${item.price * item.quantity}</div>
             </li>
           ))}
           <br />
@@ -146,7 +144,9 @@ export const PlaceOrderPage = () => {
       </div>
       <div>
         <section className="border mt-6 md:mt-28 px-4">
-          <h2 className="text-xl font-semibold my-2">Order Summary</h2>
+          <h2 className="text-medium text-center font-semibold my-2">
+            Order Summary
+          </h2>
           <ol>
             <li className="mx-6 flex justify-between gap-x-4">
               <span>Items</span>
@@ -170,7 +170,7 @@ export const PlaceOrderPage = () => {
             <div className="h-[1px]  bg-gray-200 w-[80%] mx-auto my-2"></div>
             <button
               onClick={PlaceOrderHandler}
-              className=" ml-[25%] bg-yellow-400 active:bg-yellow-500 my-2 py-1 px-6 border-[1px] border-slate-500 rounded-md "
+              className="text-white font-semibold ml-[32%] md:ml-[25%] bg-yellow-400 active:bg-yellow-400 my-2 py-1 px-6 border-[1px] border-slate-500 rounded-md "
             >
               Place Order
             </button>

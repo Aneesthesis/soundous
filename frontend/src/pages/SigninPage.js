@@ -85,7 +85,7 @@ export const SigninPage = () => {
         <div className="py-4">
           <strong>New Customer? </strong>
           <Link
-            className="underline text-yellow-500 hover:text-yellow-700"
+            className="underline text-yellow-400 hover:text-yellow-700"
             to={`/signup?redirect=${redirect}`}
           >
             Create a new Account

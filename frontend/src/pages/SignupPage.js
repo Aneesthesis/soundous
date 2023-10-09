@@ -115,7 +115,7 @@ export const SignupPage = () => {
         <div className="py-4">
           <strong>Already have an Account? </strong>
           <Link
-            className="underline text-yellow-500 hover:text-yellow-700"
+            className="underline text-yellow-400 hover:text-yellow-700"
             to={`/signin?redirect=${redirect}`}
           >
             Sign In

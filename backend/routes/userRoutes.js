@@ -19,6 +19,10 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
+      if (user.isDeactivated) {
+        res.status(403).send({ message: "User Deactivated" });
+        return;
+      }
       if (bcrypt.compareSync(req.body.password, user.password)) {
         res.send({
           _id: user._id,

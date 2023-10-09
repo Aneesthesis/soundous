@@ -244,10 +244,8 @@ export default function OrderPage() {
                   >
                     {item.name}
                   </Link>
-                  <div className="relative right-15">×{item.quantity}</div>
-                  <div className="relative right-10">
-                    ${item.price * item.quantity}
-                  </div>
+                  <div className="">×{item.quantity}</div>
+                  <div className="">${item.price * item.quantity}</div>
                 </li>
               ))}
             </div>
@@ -309,7 +307,7 @@ export default function OrderPage() {
                   {loadingDeliver && <div>Just a sec...</div>}
                   <button
                     onClick={deliverOrderHandler}
-                    className="w-full bg-yellow-400 active:bg-yellow-500 my-2 py-1 px-6 border-[1px] border-slate-500 rounded-md "
+                    className="w-full text-white font-semibold bg-yellow-400 active:bg-yellow-400 my-2 py-1 px-6 border-[1px] border-slate-500 rounded-md "
                   >
                     {order.paymentMethod === "Cash on Delivery"
                       ? "Confirm Payment and Delivery"

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Store } from "../Store";
+import { toast } from "react-toastify";
 
 export const CartPage = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -15,7 +16,7 @@ export const CartPage = () => {
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/products/x/${item._id}`);
     if (data.countInStock < quantity) {
-      window.alert("Sorry. Product out of Stock");
+      toast.warning("Sorry. Product out of Stock");
       return;
     }
     ctxDispatch({

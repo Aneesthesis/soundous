@@ -3,6 +3,7 @@ import { Rating } from "./Rating";
 import { Store } from "../Store";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const ProductDetails = ({ product }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -14,7 +15,7 @@ export const ProductDetails = ({ product }) => {
 
     const { data } = await axios.get(`/api/products/x/${product._id}`);
     if (data.countInStock < quantity) {
-      window.alert("Sorry, this product is out of stock!");
+      toast.warning("Sorry, this product is out of stock!");
       return;
     }
     ctxDispatch({
@@ -34,24 +35,24 @@ export const ProductDetails = ({ product }) => {
           />
         </div>
         <div className="product-info flex gap-y-2 flex-col w-full">
-          <div className="font-semibold text-3xl mb-2 text-gray-800">
+          <div className="font-semibold text-3xl lg:text-4xl mb-2 text-gray-800">
             {product.name}
           </div>
           <Rating rating={product.rating} numReviews={product.numReviews} />
-          <div className="text-gray-700 text-lg">
+          <div className="text-gray-700 text-base lg:text-lg">
             <span className="font-medium">Price:</span> ${product.price}
           </div>
-          <div className="text-gray-700 text-lg">
+          <div className="text-gray-700 text-base lg:text-lg">
             <span className="font-medium"> Description:</span>{" "}
             {product.description}
           </div>
-          <div className="text-gray-700 text-lg py-4">
+          <div className="text-gray-700 text-base lg:text-lg py-4">
             <span className="font-medium">Status: </span>
             <span
               className={
                 product.countInStock > 0
-                  ? "bg-green-500 px-2 py-1 text-white rounded-md"
-                  : "bg-gray-500 px-2 py-1 text-white rounded-md"
+                  ? "bg-green-500 px-2 py-1 text-white rounded-md text-sm lg:text-base"
+                  : "bg-gray-500 px-2 py-1 text-white rounded-md text-sm lg:text-base"
               }
             >
               {product.countInStock > 0 ? "Available" : "Out of Stock"}
@@ -61,24 +62,24 @@ export const ProductDetails = ({ product }) => {
             {product.countInStock > 0 && (
               <button
                 onClick={addToCartHandler}
-                className="w-full md:w-56 px-2 py-1 bg-yellow-500 font-semibold cursor-pointer rounded-md text-white hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300"
+                className="w-full md:w-56 px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"
               >
                 Add to Cart
               </button>
             )}
-            <button
-              className="w-full md:w-56 text-center mt-2 px-2 py-1 bg-yellow-500 font-semibold cursor-pointer rounded-md text-white hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300"
+            <Link
+              className="w-full md:w-56 text-center mt-2 px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"
               to={"/"}
             >
               Back
-            </button>
+            </Link>
             {state.cart.cartItems.length > 0 && (
-              <button
+              <Link
                 to={"/cart"}
-                className="w-full md:w-56 mt-2 text-center px-2 py-1 bg-yellow-500 font-semibold cursor-pointer rounded-md text-white hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300"
+                className="w-full md:w-56 mt-2 text-center px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"
               >
                 Go to Cart
-              </button>
+              </Link>
             )}
           </div>
         </div>

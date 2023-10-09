@@ -21,11 +21,13 @@ const reducer = (state, action) => {
           user._id === action.payload._id ? action.payload : user
         ),
       };
-    case "DELETE_SUCCESS":
+    case "UPDATE_SUCCESS":
       return {
         ...state,
         loading: false,
-        data: state.data.filter((user) => user._id !== action.payload),
+        data: state.data.map((user) =>
+          user._id === action.payload._id ? action.payload : user
+        ),
       };
 
     default:
@@ -71,7 +73,6 @@ function AdminUsers() {
       );
 
       if (response.status === 200) {
-        // Update the user's admin status in the state
         dispatch({ type: "UPDATE_ADMIN", payload: response.data.user });
         toast.success(
           `${
@@ -89,15 +90,22 @@ function AdminUsers() {
     }
   };
 
-  async function deleteUser(userid) {
+  async function updateUserIsDeactivated(user) {
     try {
-      await axios.delete(`/api/admin/users/${userid}`, {
-        headers: { authorization: `Bearer ${userInfo.token}` },
-      });
-      dispatch({ type: "DELETE_SUCCESS", payload: userid });
-      toast.success("User has been deleted");
+      const { data } = await axios.patch(
+        `/api/admin/users/${user._id}`,
+        {},
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+
+      dispatch({ type: "UPDATE_SUCCESS", payload: data.user });
+      toast.success(
+        `User ${!user.isDeactivated ? "marked as deactivated" : "restored"}`
+      );
     } catch (error) {
-      toast.error("Failed to delete user");
+      toast.error("Failed to update user's state");
     }
   }
 
@@ -135,7 +143,7 @@ function AdminUsers() {
         </div>
       </section>
 
-      <section className="w-3/4 p-4">
+      <section className="overflow-x-auto w-full md:w-3/4 p-4">
         <h1 className="mb-4 text-xl">Admin Users</h1>
         {loading ? (
           <div>Loaddata...</div>
@@ -168,10 +176,12 @@ function AdminUsers() {
                     </td>
                     <td className="p-5">
                       <button
-                        onClick={() => deleteUser(user._id)}
-                        className="text-red-500 underline"
+                        onClick={() => updateUserIsDeactivated(user)}
+                        className={`rounded-md w-[100px] text-white px-1 py-2 ${
+                          !user.isDeactivated ? "bg-orange-500" : "bg-green-500"
+                        }`}
                       >
-                        Delete
+                        {!user.isDeactivated ? "Deactivate" : "Restore"}
                       </button>
                     </td>
                   </tr>

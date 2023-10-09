@@ -75,7 +75,7 @@ export function ProfileScreen() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-400"
           />
         </div>
         <div className="mb-4">
@@ -89,7 +89,7 @@ export function ProfileScreen() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-400"
           />
         </div>
         <div className="mb-4">
@@ -103,7 +103,7 @@ export function ProfileScreen() {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-400"
           />
         </div>
         <div className="mb-6">
@@ -117,20 +117,20 @@ export function ProfileScreen() {
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-400"
           />
         </div>
         <div className="text-center flex flex-col md:flex-row items-center justify-center gap-4">
           <button
             type="submit"
-            className="bg-yellow-500 border-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="bg-yellow-400 border-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           >
             Update
           </button>
           <button
             onClick={() => navigate("/")}
             type="button"
-            className="bg-yellow-500 border-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="bg-yellow-400 border-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           >
             Go Back
           </button>

@@ -57,12 +57,12 @@ export default function ShippingAddressPage() {
     navigate("/payment");
   }
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center mt-8">
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>
       <CheckoutProgress step1 step2></CheckoutProgress>
-      <h1 className="text-3xl my-4">Shipping Address</h1>
+      <h1 className="text-xl md:text-2xl my-4">Shipping Address</h1>
       <form
         className="w-[80%] md:max-w-md mx-auto p-4 border rounded-md shadow-lg"
         onSubmit={SubmitAddressHandler}
@@ -78,7 +78,7 @@ export default function ShippingAddressPage() {
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-400"
           />
         </div>
         <div className="mb-4">
@@ -92,7 +92,7 @@ export default function ShippingAddressPage() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-400"
           />
         </div>
         <div className="mb-4">
@@ -106,7 +106,7 @@ export default function ShippingAddressPage() {
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-400"
           />
         </div>
         <div className="mb-4">
@@ -120,7 +120,7 @@ export default function ShippingAddressPage() {
             value={PINCode}
             onChange={(e) => setPINCode(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-400"
           />
         </div>
         <div className="mb-6">
@@ -134,13 +134,13 @@ export default function ShippingAddressPage() {
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
-            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-500"
+            className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-yellow-400"
           />
         </div>
         <div className="text-center">
           <button
             type="submit"
-            className="bg-yellow-500 border-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="bg-yellow-400 border-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           >
             Continue
           </button>
