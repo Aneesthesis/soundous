@@ -14,7 +14,7 @@ export function SearchBox() {
     <form onSubmit={submitHandler}>
       <input
         type="text"
-        className="px-4 h-8 w-[65%] outline-none rounded-md"
+        className="px-4 h-8 w-[65%] outline-none rounded-md text-black"
         onChange={(e) => setQuery(e.target.value)}
         placeholder="search products..."
       />

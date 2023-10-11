@@ -85,7 +85,6 @@ export const CartPage = () => {
                         onClick={() =>
                           updateCartHandler(item, item.quantity + 1)
                         }
-                        disabled={item.quantity === item.countInStock}
                         className="text-gray-600 hover:text-gray-800"
                       >
                         <i className="fas fa-plus-circle"></i>

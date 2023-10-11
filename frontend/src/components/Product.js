@@ -15,7 +15,7 @@ export default function Product({ products }) {
             <img
               src={prod.image}
               alt={prod.name}
-              className="w-full max-h-[400px] md:max-h-[310px] object-cover object-center"
+              className="w-full max-h-[400px] md:max-h-[310px] object-cover"
             />
           </Link>
           <div className="prod-info mt-4 text-center">
