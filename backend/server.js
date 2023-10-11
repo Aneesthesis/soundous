@@ -27,6 +27,10 @@ app.use((err, req, res, next) => {
 app.get(`/api/keys/paypal`, (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
+// Catch-all route for unknown queries
+app.all("*", (req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
 mongoose
   .connect(process.env.CONNECTION_URI, { dbName: "soundous" })
