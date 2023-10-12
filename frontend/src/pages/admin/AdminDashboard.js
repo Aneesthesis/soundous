@@ -6,30 +6,6 @@ import { toast } from "react-toastify";
 import { getError } from "../../utils/getError";
 import { MessageBox } from "../../components/UI/MessageBox";
 import { Link } from "react-router-dom";
-import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-export const options = {
-  responsive: true,
-  plugin: { legend: { position: "top" } },
-};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -81,13 +57,15 @@ function AdminDashboard() {
     dashboardData.monthlySalesData && (
       <div className="dashboard flex">
         <section className="left w-1/4 p-4">
-          <div className="menu-card bg-white rounded-lg p-4">
-            <h3 className="text-xl font-semibold mb-4">Dashboard Menu</h3>
+          <div className="hidden md:block menu-card rounded-lg p-4">
+            <h3 className="text-lg md:text-xl font-semibold mb-4">
+              Dashboard Menu
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   to="/admin-orderlist"
-                  className="text-blue-500 hover:underline"
+                  className="text-indigo-600 hover:underline"
                 >
                   Orders
                 </Link>
@@ -95,7 +73,7 @@ function AdminDashboard() {
               <li>
                 <Link
                   to="/admin-productlist"
-                  className="text-blue-500 hover:underline"
+                  className="text-indigo-600 hover:underline"
                 >
                   Products
                 </Link>
@@ -103,7 +81,7 @@ function AdminDashboard() {
               <li>
                 <Link
                   to="/admin-userlist"
-                  className="text-blue-500 hover:underline"
+                  className="text-indigo-600 hover:underline"
                 >
                   Users
                 </Link>
@@ -111,66 +89,65 @@ function AdminDashboard() {
             </ul>
           </div>
         </section>
-        <section className="right w-3/4 p-4">
-          <div className="data-card bg-white rounded-lg p-4">
-            <h1 className="text-3xl font-semibold mb-4">Dashboard</h1>
+        <section className="right flex flex-col md:flex-row gap-8 w-screen -ml-24 md:ml-0 md:w-3/4 p-4">
+          <div className="data-card bg-indigo-100 rounded-lg p-4">
+            <h1 className="text-xl md:text-2xl font-semibold text-indigo-800 mb-4">
+              Dashboard
+            </h1>
             <ul className="space-y-4">
               <li>
                 <div className="card-item flex items-center">
-                  <span className="count text-4xl font-bold">
+                  <span className="count text-2xl md:text-4xl font-bold text-indigo-800">
                     ${dashboardData.totalSales}
                   </span>
-                  <span className="label ml-2">Sales</span>
+                  <span className="label ml-2 text-gray-600">Sales</span>
                 </div>
               </li>
               <li>
                 <div className="card-item flex items-center">
-                  <span className="count text-4xl font-bold">
+                  <span className="count text-2xl md:text-4xl font-bold text-indigo-800">
                     {dashboardData.usersCount}
                   </span>
-                  <span className="label ml-2">Users</span>
+                  <span className="label ml-2 text-gray-600">Users</span>
                 </div>
               </li>
               <li>
                 <div className="card-item flex items-center">
-                  <span className="count text-4xl font-bold">
+                  <span className="count text-2xl md:text-4xl font-bold text-indigo-800">
                     {dashboardData.productsCount}
                   </span>
-
-                  <span className="label ml-2">Products</span>
+                  <span className="label ml-2 text-gray-600">Products</span>
                 </div>
               </li>
               <li>
                 <div className="card-item flex items-center">
-                  <span className="count text-4xl font-bold">
+                  <span className="count text-2xl md:text-4xl font-bold text-indigo-800">
                     {dashboardData.ordersCount}
                   </span>
-                  <span className="label ml-2">Orders</span>
-                </div>
-              </li>
-              <li>
-                <div className="card-item flex flex-col ">
-                  <div className="label ml-2 text-2xl underline mb-2">
-                    Monthly Sales Chart
-                  </div>
-                  <div>
-                    <ul className="count text-4xl font-bold">
-                      {dashboardData.monthlySalesData.map((monthlySale) => (
-                        <li key={monthlySale._id}>
-                          {monthlySale._id}: ${monthlySale.totalMonthlySales}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <span className="label ml-2 text-gray-600">Orders</span>
                 </div>
               </li>
             </ul>
+          </div>
+
+          <div className="card-item flex flex-col text-indigo-800 bg-indigo-100 rounded-lg p-4">
+            <div className="text-xl md:text-2xl font-semibold text-indigo-800 mb-4">
+              Monthly Sales Chart
+            </div>
+            <div>
+              <ul className="count text-base md:text-2xl font-bold">
+                {dashboardData.monthlySalesData.map((monthlySale) => (
+                  <li key={monthlySale._id}>
+                    {monthlySale._id}: ${monthlySale.totalMonthlySales}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
       </div>
     )
   ) : (
-    // Render something for the case when dashboardData is falsy
     <div>No dashboard data available.</div>
   );
 }

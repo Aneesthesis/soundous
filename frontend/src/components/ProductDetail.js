@@ -23,7 +23,6 @@ export const ProductDetails = ({ product }) => {
     }
   }, [cart.cartItems]);
 
-  console.log(available);
   const addToCartHandler = async () => {
     const existingItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existingItem ? existingItem.quantity + 1 : 1;
