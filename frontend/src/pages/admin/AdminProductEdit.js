@@ -154,17 +154,6 @@ function AdminProductEdit() {
     console.log("Form Data:", formData);
   };
 
-  // async function createCancelHandler() {
-  //   try {
-  //     await axios.delete(`/api/admin/products/cancelcreate`, {
-  //       headers: { authorization: `Bearer ${userInfo.token}` },
-  //     });
-  //     toast.error("Product creation failed");
-  //   } catch (error) {
-  //     toast.error(getError(error));
-  //   }
-  // }
-
   return (
     <div className="dashboard flex">
       <section className=" hidden md:block left w-1/4 p-4">

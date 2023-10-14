@@ -26,7 +26,10 @@ app.use((err, req, res, next) => {
 });
 
 app.get(`/api/keys/paypal`, (req, res) => {
-  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+  res.send(
+    "AR9-BbrlxDB9lTnyfUI2WgO4M63beOkhhWxIYiJ_lWPGrULg1d6AECNLQPkTzC34D32dahc04obE-873" ||
+      "sb"
+  );
 });
 // Catch-all route for unknown queries
 app.all("*", (req, res) => {
@@ -34,7 +37,10 @@ app.all("*", (req, res) => {
 });
 
 mongoose
-  .connect(process.env.CONNECTION_URI, { dbName: "soundous" })
+  .connect(
+    "mongodb+srv://crunchysambusa:AlrUNvu8j24PcAiX@cluster0.6l6nxek.mongodb.net/?retryWrites=true&w=majority",
+    { dbName: "soundous" }
+  )
   .then(() => {
     console.log("MONGO JUMBO");
   })

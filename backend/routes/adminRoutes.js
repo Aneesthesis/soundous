@@ -5,7 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 cloudinary.config({
   cloud_name: "dbenvvfuy",
   api_key: "877411815619814",
-  api_secret: process.env.CLOUDINARY_SECRET,
+  api_secret: "PegPGFt9JN13ZmY1K4RTkrT3kaQ",
 });
 
 import express from "express";
@@ -22,7 +22,7 @@ adminRouter.get("/cloudinary-sign", (req, res) => {
       timestamp: timestamp,
     },
 
-    process.env.CLOUDINARY_SECRET
+    "PegPGFt9JN13ZmY1K4RTkrT3kaQ"
   );
 
   res.statusCode = 200;
