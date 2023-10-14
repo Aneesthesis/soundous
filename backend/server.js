@@ -12,6 +12,14 @@ config();
 
 const app = express();
 
+app.use(
+  cors({
+    origin: ["soundous-api.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
