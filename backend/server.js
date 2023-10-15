@@ -38,10 +38,6 @@ app.get(`/api/keys/paypal`, (req, res) => {
       "sb"
   );
 });
-// Catch-all route for unknown queries
-app.all("*", (req, res) => {
-  res.status(404).json({ message: "Route not found" });
-});
 
 mongoose
   .connect(
