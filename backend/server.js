@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["soundous-api.vercel.app"],
+    origin: ["http://soundous-api.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true,
   })
