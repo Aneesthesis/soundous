@@ -41,27 +41,21 @@ userRouter.post(
 userRouter.post(
   "/signup",
   expressAsyncHandler(async (req, res) => {
-    const existingUser = await User.findOne({ email: req.body.email });
+    const newUser = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password),
+    });
 
-    if (existingUser) {
-      res.status(400).send({ message: "User already exists with this email" });
-    } else {
-      const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: bcrypt.hashSync(req.body.password),
-      });
+    const user = await newUser.save();
 
-      const user = await newUser.save();
-
-      res.send({
-        _id: user.id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        token: generateToken(user),
-      });
-    }
+    res.send({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user),
+    });
   })
 );
 

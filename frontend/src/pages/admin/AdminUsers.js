@@ -64,11 +64,6 @@ function AdminUsers() {
 
   const toggleAdminStatus = async (user) => {
     try {
-      // not allowed if currently logged-in admin tries to update his own status
-      if (user._id === userInfo._id) {
-        toast.warn("Action not allowed");
-        return;
-      }
       const response = await axios.put(
         `/api/admin/users/${user._id}/toggle-admin`,
         {},
@@ -97,11 +92,6 @@ function AdminUsers() {
 
   async function updateUserIsDeactivated(user) {
     try {
-      // not allowed if currently logged-in admin tries to update his own status
-      if (user._id === userInfo._id) {
-        toast.warn("Action not allowed. You can't deactivate yourself!");
-        return;
-      }
       const { data } = await axios.patch(
         `/api/admin/users/${user._id}`,
         {},
@@ -179,7 +169,6 @@ function AdminUsers() {
                     <td className="p-5">{user.email}</td>
                     <td className="p-5">
                       <input
-                        disabled={user._id === userInfo._id}
                         type="checkbox"
                         checked={user.isAdmin}
                         onChange={() => toggleAdminStatus(user)}
@@ -187,14 +176,9 @@ function AdminUsers() {
                     </td>
                     <td className="p-5">
                       <button
-                        disabled={user._id === userInfo._id}
                         onClick={() => updateUserIsDeactivated(user)}
                         className={`rounded-md w-[100px] text-white px-1 py-2 ${
-                          user._id === userInfo._id
-                            ? "bg-gray-200"
-                            : !user.isDeactivated
-                            ? "bg-orange-500"
-                            : "bg-green-500"
+                          !user.isDeactivated ? "bg-orange-500" : "bg-green-500"
                         }`}
                       >
                         {!user.isDeactivated ? "Deactivate" : "Restore"}
