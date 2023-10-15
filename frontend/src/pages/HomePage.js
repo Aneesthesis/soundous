@@ -1,7 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { Link } from "react-router-dom";
 import { fetchProducts } from "../helper/fetchProducts";
-import logger from "use-reducer-logger";
 import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
 import { LoadingBox } from "../components/UI/LoadingBox";
@@ -21,12 +19,11 @@ const reducer = (state, action) => {
 };
 
 export default function HomePage() {
-  const [{ loading, products, error }, dispatch] = useReducer(logger(reducer), {
+  const [{ loading, products, error }, dispatch] = useReducer(reducer, {
     loading: true,
     products: [],
     error: "",
   });
-  //const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {

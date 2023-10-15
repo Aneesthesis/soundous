@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Rating } from "./Rating";
 import { Store } from "../Store";
 import axios from "axios";
@@ -8,6 +8,20 @@ import { toast } from "react-toastify";
 export const ProductDetails = ({ product }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;
+
+  const [available, setIsAvailable] = useState(true);
+
+  useEffect(() => {
+    const existingItem = cart.cartItems.find((x) => x._id === product._id);
+
+    if (existingItem && existingItem.quantity) {
+      if (existingItem.quantity === existingItem.countInStock) {
+        setIsAvailable(false);
+      } else {
+        setIsAvailable(true);
+      }
+    }
+  }, [cart.cartItems]);
 
   const addToCartHandler = async () => {
     const existingItem = cart.cartItems.find((x) => x._id === product._id);
@@ -47,19 +61,18 @@ export const ProductDetails = ({ product }) => {
             {product.description}
           </div>
           <div className="text-gray-700 text-base lg:text-lg py-4">
-            <span className="font-medium">Status: </span>
             <span
               className={
-                product.countInStock > 0
+                available
                   ? "bg-green-500 px-2 py-1 text-white rounded-md text-sm lg:text-base"
                   : "bg-gray-500 px-2 py-1 text-white rounded-md text-sm lg:text-base"
               }
             >
-              {product.countInStock > 0 ? "Available" : "Out of Stock"}
+              {available ? "Available" : "Out of Stock"}
             </span>
           </div>
           <div className="flex flex-col mt-4">
-            {product.countInStock > 0 && (
+            {available && (
               <button
                 onClick={addToCartHandler}
                 className="w-full md:w-56 px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"

@@ -11,14 +11,6 @@ config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: ["http://soundous-api.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -33,17 +25,15 @@ app.use((err, req, res, next) => {
 });
 
 app.get(`/api/keys/paypal`, (req, res) => {
-  res.send(
-    "AR9-BbrlxDB9lTnyfUI2WgO4M63beOkhhWxIYiJ_lWPGrULg1d6AECNLQPkTzC34D32dahc04obE-873" ||
-      "sb"
-  );
+  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+});
+// Catch-all route for unknown queries
+app.all("*", (req, res) => {
+  res.status(404).json({ message: "Route not found" });
 });
 
 mongoose
-  .connect(
-    "mongodb+srv://crunchysambusa:AlrUNvu8j24PcAiX@cluster0.6l6nxek.mongodb.net/?retryWrites=true&w=majority",
-    { dbName: "soundous" }
-  )
+  .connect(process.env.CONNECTION_URI, { dbName: "soundous" })
   .then(() => {
     console.log("MONGO JUMBO");
   })
