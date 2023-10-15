@@ -31,6 +31,7 @@ import CreateProductForm from "./pages/admin/AdminCreateProduct";
 import NotFound from "./pages/NotFound";
 
 function App() {
+  axios.defaults.withCredentials = true;
   const [isSideBarOpen, setSideBarOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
