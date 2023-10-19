@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://soundous.onrender.com/", // Allow requests from this origin
+    origin: "*", // Allow requests from this origin
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
