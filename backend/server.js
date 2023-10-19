@@ -1,7 +1,5 @@
 import express from "express";
 import { config } from "dotenv";
-// import { fileURLToPath } from "url";
-// import path, { dirname } from "path";
 import mongoose from "mongoose";
 import { productRouter } from "./routes/productRoutes.js";
 import { userRouter } from "./routes/userRoutes.js";
@@ -10,9 +8,6 @@ import { adminRouter } from "./routes/adminRoutes.js";
 import cors from "cors";
 
 config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const app = express();
 
@@ -27,14 +22,6 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// // Serve static files
-// app.use(express.static(path.join(__dirname, "build")));
-
-// // Define a catch-all route
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "build", "index.html"));
-// });
 
 //app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);
