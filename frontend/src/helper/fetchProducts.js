@@ -1,6 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const fetchProducts = async () => {
-  const result = await axios.get('/api/products');
+  const result = await axios.get(
+    "https://soundous-api.onrender.com/api/products"
+  );
   return result;
 };

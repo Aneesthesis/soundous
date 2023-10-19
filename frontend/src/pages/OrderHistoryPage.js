@@ -36,9 +36,12 @@ export const OrderHistoryPage = () => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQ" });
       try {
-        const { data } = await axios.get(`/api/orders/history`, {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `https://soundous-api.onrender.com/api/orders/history`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (error) {
         dispatch({ type: `FETCH_FAIL`, payload: getError(error) });

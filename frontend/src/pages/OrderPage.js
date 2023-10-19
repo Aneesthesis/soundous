@@ -90,7 +90,7 @@ export default function OrderPage() {
       try {
         dispatch({ type: "PAY_REQ" });
         const { data } = await axios.put(
-          `/api/orders/${order._id}/pay`,
+          `https://soundous-api.onrender.com/api/orders/${order._id}/pay`,
           details,
           { headers: { authorization: `Bearer ${userInfo.token}` } }
         );
@@ -114,9 +114,12 @@ export default function OrderPage() {
     const fetchOrder = async () => {
       try {
         dispatch({ type: "FETCH_REQ" });
-        const { data } = await axios.get(`/api/orders/${orderId}`, {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `https://soundous-api.onrender.com/api/orders/${orderId}`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (error) {
         dispatch({ type: "FETCH_FAIL", payload: getError(error) });
@@ -167,7 +170,7 @@ export default function OrderPage() {
       dispatch({ type: "DELIV_REQ" });
 
       const { data } = await axios.put(
-        `/api/admin/orders/${order._id}/deliver`,
+        `https://soundous-api.onrender.com/api/admin/orders/${order._id}/deliver`,
         {}, // Empty object for the request body
         {
           headers: { authorization: `Bearer ${userInfo.token}` },

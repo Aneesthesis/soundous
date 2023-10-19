@@ -63,7 +63,7 @@ export const SearchPage = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=${page}&query=${query}&category=${category}&brand=${brand}&price=${price}&rating=${rating}&order=${order}`
+          `https://soundous-api.onrender.com/api/products/search?page=${page}&query=${query}&category=${category}&brand=${brand}&price=${price}&rating=${rating}&order=${order}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (error) {
@@ -77,7 +77,9 @@ export const SearchPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`/api/products/categories`);
+        const { data } = await axios.get(
+          `https://soundous-api.onrender.com/api/products/categories`
+        );
         setCategories(data);
       } catch (error) {
         toast.error(getError(error));
@@ -90,7 +92,9 @@ export const SearchPage = () => {
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const { data } = await axios.get(`/api/products/brands`);
+        const { data } = await axios.get(
+          `https://soundous-api.onrender.com/api/products/brands`
+        );
         setBrands(data);
       } catch (error) {
         toast.error(getError(error));

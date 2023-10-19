@@ -27,7 +27,9 @@ export const ProductDetails = ({ product }) => {
     const existingItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existingItem ? existingItem.quantity + 1 : 1;
 
-    const { data } = await axios.get(`/api/products/x/${product._id}`);
+    const { data } = await axios.get(
+      `https://soundous-api.onrender.com/api/products/x/${product._id}`
+    );
     if (data.countInStock < quantity) {
       toast.warning("Sorry, this product is out of stock!");
       return;

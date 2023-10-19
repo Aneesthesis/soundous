@@ -14,7 +14,9 @@ export const CartPage = () => {
   } = state;
 
   const updateCartHandler = async (item, quantity) => {
-    const { data } = await axios.get(`/api/products/x/${item._id}`);
+    const { data } = await axios.get(
+      `https://soundous-api.onrender.com/api/products/x/${item._id}`
+    );
     if (data.countInStock < quantity) {
       toast.warning("Sorry. Product out of Stock");
       return;

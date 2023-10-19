@@ -50,9 +50,12 @@ function AdminUsers() {
     const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQ" });
-        const { data } = await axios.get(`/api/users`, {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `https://soundous-api.onrender.com/api/users`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (error) {
         dispatch({ type: "FETCH_FAIL", payload: getError(error) });
@@ -70,7 +73,7 @@ function AdminUsers() {
         return;
       }
       const response = await axios.put(
-        `/api/admin/users/${user._id}/toggle-admin`,
+        `https://soundous-api.onrender.com/api/admin/users/${user._id}/toggle-admin`,
         {},
         {
           headers: { authorization: `Bearer ${userInfo.token}` },
@@ -103,7 +106,7 @@ function AdminUsers() {
         return;
       }
       const { data } = await axios.patch(
-        `/api/admin/users/${user._id}`,
+        `https://soundous-api.onrender.com/api/admin/users/${user._id}`,
         {},
         {
           headers: { authorization: `Bearer ${userInfo.token}` },

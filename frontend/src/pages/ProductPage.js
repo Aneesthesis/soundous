@@ -32,7 +32,9 @@ export default function ProductPage() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const response = await axios.get(`/api/products/${slug}`);
+        const response = await axios.get(
+          `https://soundous-api.onrender.com/api/products/${slug}`
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: response.data });
       } catch (error) {
         dispatch({ type: "FETCH_FAIL", payload: getError(error) });

@@ -26,10 +26,13 @@ export const SigninPage = () => {
   const signinHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/users/signin", {
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://soundous-api.onrender.com/api/users/signin",
+        {
+          email,
+          password,
+        }
+      );
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate(redirect || "/");

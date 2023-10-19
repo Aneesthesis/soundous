@@ -71,7 +71,7 @@ const CreateProductForm = () => {
     dispatch({ type: "CREATE_REQ" });
     try {
       const { data } = await axios.post(
-        `/api/admin/products`,
+        `https://soundous-api.onrender.com/api/admin/products`,
         {
           name: productData.name,
           slug: productData.slug,
@@ -104,7 +104,9 @@ const CreateProductForm = () => {
       dispatch({ type: "UPLOAD_REQ" });
       const {
         data: { signature, timestamp },
-      } = await axios(`/api/admin/cloudinary-sign`);
+      } = await axios(
+        `https://soundous-api.onrender.com/api/admin/cloudinary-sign`
+      );
 
       const file = e.target.files[0];
       const imageFormData = new FormData();

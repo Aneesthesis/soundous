@@ -59,7 +59,7 @@ export const PlaceOrderPage = () => {
     try {
       dispatch({ type: "CREATE_ORDER_REQ" });
       const { data } = await axios.post(
-        "/api/orders",
+        "https://soundous-api.onrender.com/api/orders",
         {
           orderItems: state.cart.cartItems,
           shippingAddress: state.cart.shippingAddress,

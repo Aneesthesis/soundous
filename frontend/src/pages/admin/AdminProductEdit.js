@@ -79,9 +79,12 @@ function AdminProductEdit() {
     const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQ" });
-        const { data } = await axios.get(`/api/admin/products/${productId}`, {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `https://soundous-api.onrender.com/api/admin/products/${productId}`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         setFormData(data);
         dispatch({ type: "FETCH_SUCCESS", payload: data });
         console.log(data);
@@ -104,7 +107,9 @@ function AdminProductEdit() {
       dispatch({ type: "UPLOAD_REQ" });
       const {
         data: { signature, timestamp },
-      } = await axios(`/api/admin/cloudinary-sign`);
+      } = await axios(
+        `https://soundous-api.onrender.com/api/admin/cloudinary-sign`
+      );
 
       const file = e.target.files[0];
       const imageFormData = new FormData();
@@ -131,7 +136,7 @@ function AdminProductEdit() {
     try {
       dispatch({ type: "UPDATE_REQ" });
       await axios.put(
-        `/api/admin/products/${productId}`,
+        `https://soundous-api.onrender.com/api/admin/products/${productId}`,
         {
           name,
           price,

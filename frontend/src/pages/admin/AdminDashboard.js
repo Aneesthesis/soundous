@@ -36,9 +36,12 @@ function AdminDashboard() {
       try {
         dispatch({ type: "FETCH_REQ" });
 
-        const { data } = await axios.get(`/api/admin/`, {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `https://soundous-api.onrender.com/api/admin/`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err });

@@ -52,7 +52,7 @@ function AdminProducts() {
     }
     try {
       const { data } = await axios.delete(
-        `/api/admin/products/${product._id}`,
+        `https://soundous-api.onrender.com/api/admin/products/${product._id}`,
         {
           headers: { authorization: `Bearer ${userInfo.token}` },
         }
@@ -73,9 +73,12 @@ function AdminProducts() {
     const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQ" });
-        const { data } = await axios.get(`/api/admin/products`, {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `https://soundous-api.onrender.com/api/admin/products`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (error) {
         dispatch({ type: "FETCH_FAIL", payload: getError(error) });

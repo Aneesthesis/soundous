@@ -42,7 +42,7 @@ export function ProfileScreen() {
       }
       dispatch({ type: "UPDATE_REQ" });
       const { data } = await axios.put(
-        `/api/users/profile`,
+        `https://soundous-api.onrender.com/api/users/profile`,
         { name, email, password: newPassword },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
