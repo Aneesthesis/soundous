@@ -1,9 +1,9 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { fetchProducts } from "../helper/fetchProducts";
 import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
 import { LoadingBox } from "../components/UI/LoadingBox";
 import { MessageBox } from "../components/UI/MessageBox";
+import axios from "axios";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,7 +29,9 @@ export default function HomePage() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const response = await fetchProducts();
+        const response = await axios.get(
+          "https://soundous-api.onrender.com/api/products"
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: response.data });
       } catch (error) {
         dispatch({ type: "FETCH_FAIL", payload: error.message });
