@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
-import { fileURLToPath } from "url";
-import path, { dirname } from "path";
+// import { fileURLToPath } from "url";
+// import path, { dirname } from "path";
 import mongoose from "mongoose";
 import { productRouter } from "./routes/productRoutes.js";
 import { userRouter } from "./routes/userRoutes.js";
@@ -28,13 +28,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files (e.g., your built React app)
-app.use(express.static(path.join(__dirname, "build")));
+// // Serve static files
+// app.use(express.static(path.join(__dirname, "build")));
 
-// Define a catch-all route
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// // Define a catch-all route
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 //app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);

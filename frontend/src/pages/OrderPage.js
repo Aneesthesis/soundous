@@ -140,9 +140,12 @@ export default function OrderPage() {
       }
     } else {
       const loadPaypalScript = async () => {
-        const { data: clientId } = await axios.get("/api/keys/paypal", {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data: clientId } = await axios.get(
+          "https://soundous-api.onrender.com/api/keys/paypal",
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         paypalDispatch({
           type: "resetOptions",
           value: {
