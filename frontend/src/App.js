@@ -28,22 +28,16 @@ import AdminProducts from "./pages/admin/AdminProducts";
 import AdminProductEdit from "./pages/admin/AdminProductEdit";
 import AdminUsers from "./pages/admin/AdminUsers";
 import CreateProductForm from "./pages/admin/AdminCreateProduct";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  axios.defaults.withCredentials = true;
   const [isSideBarOpen, setSideBarOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-
-  // Function to toggle the sidebar
-  const toggleSideBar = (e) => {
-    setSideBarOpen(!isSideBarOpen);
-    console.log(e.target.classList.contains("hamburger-icon"));
-  };
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
 
-  const sidebarRef = useRef(null); // Reference to the sidebar element
+  const sidebarRef = useRef(null);
 
   function signoutHandler() {
     ctxDispatch({ type: "USER_SIGNOUT" });
@@ -58,7 +52,6 @@ function App() {
       try {
         const { data } = await axios.get(`/api/products/categories`);
         setCategories(data);
-        console.log(data);
       } catch (error) {
         toast.error(getError(error));
       }
@@ -68,30 +61,22 @@ function App() {
 
   useEffect(() => {
     // Function to handle clicks outside of the sidebar
-
     const handleClickOutside = (e) => {
-      // Check if the clicked element has the "hamburger-icon" class
-      if (e.target.classList.contains("hamburger-icon") && e.button === 0) {
-        console.log("i m getting called");
-        // e.button === 0 ensures it's a left click
-        // Clicked on the hamburger icon, so toggle the sidebar
+      if (e.target.classList.contains("hamburger-icon")) {
         setSideBarOpen(!isSideBarOpen);
+        return;
       }
-
       if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
-        // Clicked outside of the sidebar, so close it
         setSideBarOpen(false);
       }
     };
 
     // Add the event listener
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Cleanup the event listener when the component unmounts
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isSideBarOpen]);
 
   return (
     <BrowserRouter>
@@ -101,10 +86,7 @@ function App() {
           limit={1}
         />
         <nav className="navbar flex py-3 px-4 md:py-4 md:px-8 lg:py-4 lg:px-10 bg-gray-800 text-white justify-between items-center h-16">
-          <i
-            onClick={toggleSideBar}
-            className="cursor-pointer hamburger-icon w-fit fas fa-bars text-amber-400 mr-4"
-          ></i>
+          <i className="cursor-pointer hamburger-icon w-fit fas fa-bars text-amber-400 mr-4"></i>
 
           <Link
             className="hidden lg:block -ml-80 text-amber-400 text-2xl"
@@ -321,6 +303,7 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
+              <Route path="*" element={<NotFound />}></Route>
             </Routes>
           </section>
         </main>

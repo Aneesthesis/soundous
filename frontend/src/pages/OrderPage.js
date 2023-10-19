@@ -189,8 +189,8 @@ export default function OrderPage() {
   ) : (
     order &&
     order.shippingAddress && (
-      <div className="max-w-6xl mx:5 md:mx-20 flex flex-col md:flex-row md:gap-x-8">
-        <div>
+      <div className="max-w-6xl mx:5 md:mx-20 gap-4 flex flex-col md:flex-row md:justify-between">
+        <div className="flex-grow">
           <section className="text-2xl font-bold my-6">
             Order #{order._id} <br />
             Ordered On: {order.createdAt.split("T").join("___")}

@@ -43,6 +43,7 @@ export default function AdminOrderPage() {
     fetchData();
   }, []);
 
+  console.log(orders);
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
