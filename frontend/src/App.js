@@ -29,6 +29,7 @@ import AdminProductEdit from "./pages/admin/AdminProductEdit";
 import AdminUsers from "./pages/admin/AdminUsers";
 import CreateProductForm from "./pages/admin/AdminCreateProduct";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./utils/ScrollToTop";
 
 function App() {
   const [isSideBarOpen, setSideBarOpen] = useState(false);
@@ -224,6 +225,7 @@ function App() {
         <main className="pt-16">
           <section className="main min-h-screen text-sm md:text-base ">
             <Routes>
+              <ScrollToTop />
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/products/:slug" element={<ProductPage />}></Route>
               <Route path="/cart" element={<CartPage />}></Route>
