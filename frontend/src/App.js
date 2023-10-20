@@ -108,7 +108,7 @@ function App() {
             </Link>
           </div>
         </nav>
-
+        <ScrollToTop />
         <div
           className={`sidebar z-50 ${
             isSideBarOpen ? "left-0" : "-left-[300px]"
@@ -225,7 +225,6 @@ function App() {
         <main className="pt-16">
           <section className="main min-h-screen text-sm md:text-base ">
             <Routes>
-              <ScrollToTop />
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/products/:slug" element={<ProductPage />}></Route>
               <Route path="/cart" element={<CartPage />}></Route>
