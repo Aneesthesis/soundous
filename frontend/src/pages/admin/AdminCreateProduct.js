@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../utils/getError";
 import axios from "axios";
 import { Store } from "../../Store";
+import { Helmet } from "react-helmet-async";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -131,6 +132,9 @@ const CreateProductForm = () => {
 
   return (
     <div className="max-w-md mx-auto mt-4 p-4 bg-white rounded-md shadow-md">
+      <Helmet>
+        <title>Create Product</title>
+      </Helmet>
       <h2 className="text-2xl font-semibold mb-4">Create New Product</h2>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
         <div className="mb-4">

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../utils/getError";
 import { MessageBox } from "../../components/UI/MessageBox";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -59,6 +60,9 @@ function AdminDashboard() {
     dashboardData &&
     dashboardData.monthlySalesData && (
       <div className="dashboard flex">
+        <Helmet>
+          <title>Dashboard</title>
+        </Helmet>
         <section className="left w-1/4 p-4">
           <div className="hidden md:block menu-card rounded-lg p-4">
             <h3 className="text-lg md:text-xl font-semibold mb-4">

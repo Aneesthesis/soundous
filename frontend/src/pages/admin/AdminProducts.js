@@ -6,6 +6,7 @@ import { LoadingBox } from "../../components/UI/LoadingBox";
 import { MessageBox } from "../../components/UI/MessageBox";
 import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
+import { Helmet } from "react-helmet-async";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -93,6 +94,9 @@ function AdminProducts() {
   ) : (
     products && (
       <div className="dashboard flex">
+        <Helmet>
+          <title>Admin View Products</title>
+        </Helmet>
         <section className="hidden md:block left w-1/4 p-4">
           <div className="menu-card bg-white rounded-lg p-4">
             <h3 className="text-xl font-semibold mb-4">Dashboard Menu</h3>

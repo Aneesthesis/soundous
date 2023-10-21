@@ -58,7 +58,9 @@ export function ProfileScreen() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <Helmet>User Profile</Helmet>
+      <Helmet>
+        <title>User Profile</title>
+      </Helmet>
       <h1 className="text-3xl mb-4">Your Profile</h1>
       <form
         onSubmit={formSubmitHandler}

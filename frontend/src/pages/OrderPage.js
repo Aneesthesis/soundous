@@ -7,6 +7,7 @@ import axios from "axios";
 import { getError } from "../utils/getError";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -196,6 +197,9 @@ export default function OrderPage() {
     order &&
     order.shippingAddress && (
       <div className="max-w-6xl mx:5 md:mx-20 gap-4 flex flex-col md:flex-row md:justify-between">
+        <Helmet>
+          <title>Order Confirmed</title>
+        </Helmet>
         <div className="flex-grow">
           <section className="text-2xl font-bold my-6">
             Order #{order._id} <br />

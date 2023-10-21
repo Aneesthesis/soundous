@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../utils/getError";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -125,6 +126,9 @@ function AdminUsers() {
   return (
     <div className="dashboard flex">
       <section className="hidden md:block left w-1/4 p-4">
+        <Helmet>
+          <title>Admin View Users</title>
+        </Helmet>
         <div className="menu-card bg-white rounded-lg p-4">
           <h3 className="text-xl font-semibold mb-4">Dashboard Menu</h3>
           <ul className="space-y-2">

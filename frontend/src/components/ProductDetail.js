@@ -4,6 +4,7 @@ import { Store } from "../Store";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 export const ProductDetails = ({ product }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -42,6 +43,9 @@ export const ProductDetails = ({ product }) => {
 
   return (
     <div className="container mx-auto px-4">
+      <Helmet>
+        <title>{product.name}</title>
+      </Helmet>
       <div className="product-detail mx-auto my-5 flex flex-col md:flex-row gap-x-10">
         <div className="image sm:w-60 lg:w-1/2">
           <img
