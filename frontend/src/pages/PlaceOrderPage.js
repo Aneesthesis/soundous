@@ -132,9 +132,9 @@ export const PlaceOrderPage = () => {
                   {item.name}
                 </Link>
 
-                <div className="my-auto">×{item.quantity}</div>
+                <div className="my-auto mr-2">×{item.quantity}</div>
               </div>
-              <div className="flex flex-row justify-around gap-x-16 mr-8">
+              <div className="flex flex-row justify-around gap-x-16 mx-8">
                 <div>${item.price * item.quantity}</div>
               </div>
             </li>
