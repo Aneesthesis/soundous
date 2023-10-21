@@ -73,27 +73,27 @@ export const ProductDetails = ({ product }) => {
               {available ? "Available" : "Out of Stock"}
             </span>
           </div>
-          <div className="flex flex-col mt-4">
+          <div className="flex flex-col mt-4 ">
             {available && (
               <button
                 onClick={addToCartHandler}
-                className="w-full md:w-56 px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"
+                className="w-full h-14 md:h-auto md:w-56 px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"
               >
                 Add to Cart
               </button>
             )}
             <Link
-              className="w-full md:w-56 text-center mt-2 px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"
+              className="flex items-center justify-between w-full h-14 md:h-auto md:w-56 text-center mt-2 px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"
               to={"/"}
             >
-              Back
+              <div className="mx-auto">Back</div>
             </Link>
             {state.cart.cartItems.length > 0 && (
               <Link
                 to={"/cart"}
-                className="w-full md:w-56 mt-2 text-center px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"
+                className="flex items-center w-full h-14 md:h-auto md:w-56 mt-2 text-center px-2 py-1 bg-yellow-400 font-semibold cursor-pointer rounded-md text-white text-sm lg:text-base hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-blue-300"
               >
-                Go to Cart
+                <div className="mx-auto"> Go to Cart</div>
               </Link>
             )}
           </div>

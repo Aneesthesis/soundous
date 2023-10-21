@@ -97,8 +97,8 @@ function App() {
           >
             Soundous
           </Link>
-
           <SearchBox />
+
           <div className="flex items-center space-x-4">
             <Link to="/cart" className="relative group">
               <span className="text-white font-semibold absolute -top-1">
@@ -116,7 +116,7 @@ function App() {
           ref={sidebarRef}
           style={{
             position: "fixed",
-            top: ["65px"], // Stick it to the top of the viewport
+            top: ["65px"],
           }}
         >
           <div className="p-4">

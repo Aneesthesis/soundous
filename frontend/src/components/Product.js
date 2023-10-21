@@ -5,7 +5,7 @@ import { Rating } from "./Rating";
 
 export default function Product({ products }) {
   return (
-    <div className="flex flex-wrap justify-center md:gap-x-4 px-2 my-4 md:px-0 md:my-14 ">
+    <div className="flex flex-wrap justify-center md:gap-x-4 px-2 my-4 md:px-0 md:my-14 whitespace-nowrap">
       {products.map((prod) => (
         <div
           className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 mb-12 md:hover:w-[25%] duration-300"

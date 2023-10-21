@@ -94,24 +94,24 @@ export const CartPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="price font-semibold text-lg">
+                <div className="flex justify-around gap-x-16 font-semibold text-lg">
                   ${item.price * item.quantity}
+                  <button
+                    onClick={() => removeItemHandler(item)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    <i className="fas fa-trash"></i>
+                  </button>
                 </div>
-                <button
-                  onClick={() => removeItemHandler(item)}
-                  className="text-red-600 hover:text-red-800"
-                >
-                  <i className="fas fa-trash"></i>
-                </button>
               </li>
             ))}
           </ol>
-          <div className="subtotal text-xl font-semibold bg-gray-100 w-full lg:w-1/4 p-4 flex flex-col justify-between">
+          <div className="subtotal max-h-20 text-xl font-semibold bg-gray-100 w-full lg:w-1/4 p-4 flex flex-col justify-between">
             <span>
               Subtotal (
               {cartItems.reduce((acc, curr) => acc + curr.quantity, 0)} items):
             </span>
-            <span className="text-blue-700">
+            <span className="text-blue-700 text-2xl">
               $
               {cartItems.reduce(
                 (acc, curr) => acc + curr.price * curr.quantity,

@@ -242,16 +242,22 @@ export default function OrderPage() {
             <h3 className="text-xl font-semibold mb-2">Items</h3>
             <div>
               {order.orderItems.map((item) => (
-                <li className="flex items-center justify-between  border border-b-2">
-                  <img className="w-[60px]" src={item.image} />
-                  <Link
-                    className="underline text-blue-700"
-                    to={`/products/${item.slug}`}
-                  >
-                    {item.name}
-                  </Link>
-                  <div className="">×{item.quantity}</div>
-                  <div className="">${item.price * item.quantity}</div>
+                <li className="flex items-center justify-between border border-b-2 ">
+                  <div className="flex flex-row gap-x-6">
+                    <img className="w-[60px]" src={item.image} />
+
+                    <Link
+                      className="underline text-blue-700 text-center my-auto"
+                      to={`/products/${item.slug}`}
+                    >
+                      {item.name}
+                    </Link>
+
+                    <div className="my-auto">×{item.quantity}</div>
+                  </div>
+                  <div className="flex flex-row justify-around gap-x-16 mr-8">
+                    <div>${item.price * item.quantity}</div>
+                  </div>
                 </li>
               ))}
             </div>

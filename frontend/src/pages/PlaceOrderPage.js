@@ -118,19 +118,25 @@ export const PlaceOrderPage = () => {
             Edit
           </Link>
         </section>
-        <section className=" border max-w-2xl">
+        <section className="border max-w-2xl">
           <h2 className="text-base font-semibold my-2">Items</h2>
           {state.cart.cartItems.map((item) => (
-            <li className="flex items-center justify-between  border border-b-2">
-              <img className="w-[60px]" src={item.image} />
-              <Link
-                className="underline text-blue-700"
-                to={`/products/${item.slug}`}
-              >
-                {item.name}
-              </Link>
-              <div>×{item.quantity}</div>
-              <div>${item.price * item.quantity}</div>
+            <li className="flex items-center justify-between border border-b-2 ">
+              <div className="flex flex-row gap-x-6">
+                <img className="w-[60px]" src={item.image} />
+
+                <Link
+                  className="underline text-blue-700 text-center my-auto"
+                  to={`/products/${item.slug}`}
+                >
+                  {item.name}
+                </Link>
+
+                <div className="my-auto">×{item.quantity}</div>
+              </div>
+              <div className="flex flex-row justify-around gap-x-16 mr-8">
+                <div>${item.price * item.quantity}</div>
+              </div>
             </li>
           ))}
           <br />
