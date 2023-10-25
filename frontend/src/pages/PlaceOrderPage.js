@@ -98,7 +98,7 @@ export const PlaceOrderPage = () => {
           <span className="font-bold">Name: </span> <span>{fullName}</span>{" "}
           <br />
           <span className="font-bold">Address: </span>
-          <span>{address + city + PINCode + country}</span>
+          <span>{address + " " + city + " " + PINCode + " " + country}</span>
           <br />
           <Link
             className="underline text-blue-700 active:text-blue-500"

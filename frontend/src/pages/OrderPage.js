@@ -211,9 +211,15 @@ export default function OrderPage() {
             <span className="font-bold">Name</span>:{" "}
             {order.shippingAddress.fullName} <br />
             <span className="font-bold">Address</span>:
-            {order.shippingAddress.address} {order.shippingAddress.city}
-            {order.shippingAddress.PINCode}
-            {order.shippingAddress.country}
+            <span>
+              {order.shippingAddress.address +
+                " " +
+                order.shippingAddress.city +
+                " " +
+                order.shippingAddress.PINCode +
+                " " +
+                order.shippingAddress.country}
+            </span>
             <div
               className={`${
                 order.isDelivered
