@@ -8,7 +8,7 @@ const initialState = {
     : null,
   cart: {
     shippingAddress: JSON.parse(localStorage.getItem("shippingAddress")) || {},
-    paymentMethod: localStorage.getItem("paymentMethod") || "",
+    paymentMethod: localStorage.getItem("paymentMethod") || "", // payment method shall be a stored as string
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],

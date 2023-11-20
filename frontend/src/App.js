@@ -30,8 +30,17 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import CreateProductForm from "./pages/admin/AdminCreateProduct";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./utils/ScrollToTop";
+import { useManipulateArray } from "./helper/fetchProducts";
 
 function App() {
+  // const [myArray, setMyArray] = useState([1, 3, 4, 5]);
+
+  // const manipulateResult = useManipulateArray({
+  //   initialArray: myArray,
+  //   task: "pop",
+  //   element: 5,
+  // });
+
   const [isSideBarOpen, setSideBarOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 

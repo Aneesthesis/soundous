@@ -289,32 +289,7 @@ adminRouter.put(
   })
 );
 
-// delete user by ID
-// adminRouter.delete(
-//   "/users/:userId/",
-//   isAuth,
-//   expressAsyncHandler(async (req, res) => {
-//     if (!req.user || !req.user.isAdmin) {
-//       return res
-//         .status(401)
-//         .send({ message: "Sign in as an Admin to continue" });
-//     }
-
-//     try {
-//       const user = await User.findByIdAndDelete(req.params["userId"]);
-
-//       if (!user) {
-//         return res.status(404).send({ message: "User not found" });
-//       }
-
-//       res.send({ user, message: "User Deleted!" });
-//     } catch (error) {
-//       return res.status(500).send({ message: "Internal Server Error" });
-//     }
-//   })
-// );
-
-// update User active status
+// update User ACTIVE/INACTIVE status
 adminRouter.patch(
   "/users/:userId/",
   isAuth,
